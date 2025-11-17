@@ -1,0 +1,113 @@
+:root {
+    --header: #000; /* para el header */
+    --background: #101010; /* para el background */
+    --footer: #242323; /* para el footer */
+    --card: #0B0B0B; /* para los cards con la informacion*/
+    --details: #78D3CF; /* para los detalles de los botones y demas */
+    --hover: #06635F; /* para el hover de los botones */
+    --font: #fff; /* para el font*/
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Nunito", sans-serif;
+    color: var(--font);
+}
+
+/* Estilos para el Header */
+
+header h1 {
+    font-size: xxx-large;
+}
+
+header {
+    background-color: var(--header);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    font-size: 1em;
+}
+
+nav a{
+    color: var(--font);
+    text-decoration: none;
+}
+
+header a:hover{
+    color: var(--details);
+}
+
+
+/* Estilos para el Footer */
+
+footer {
+    background-color: var(--footer);
+    width: 100%;
+    padding: 20px;
+}
+
+#footer-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+#footer-name h2{
+    margin-bottom: 10px;
+}
+
+footer a:hover{
+    color: var(--details)
+}
+
+#authors-info {
+    text-align: center;
+    padding: 20px;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid var(--background);
+}
+
+/* Estilos para el para la pagina inicial */
+
+#home-view {
+    background-image: url(images/edificios.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90vh;
+    align-content: center;
+    text-align: center;
+}
+
+#home-view h1 {
+    font-size: xxx-large;
+    margin: 25px;
+}
+
+.button {
+    text-decoration: none;
+    background-color: var(--details);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1em;
+}
+
+.button:hover {
+    background-color: var(--hover);
+}
