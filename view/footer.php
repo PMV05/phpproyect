@@ -13,7 +13,7 @@
         <hr />
 
         <!-- Informacion de los autores -->
-        <p id="authors-info">CCOM4019 | UPR-Arecibo | Diseñado por Jonathan J. Vega Rivera - Joseph I. Perez Nieves - Pedro M. Vázquez González
+        <p id="authors-info">CCOM4019 | UPR-Arecibo | Diseñado por Jonathan J. Vega Rivera - Joseph I. Perez Nieves - Pedro M. Vázquez González</p>
     </footer>
 </body>
 </html>

@@ -1,5 +1,5 @@
-<?php include("../util/main.php") ?>
-<?php include("../view/header.php") ?>
+<?php include("../../util/main.php") ?>
+<?php include("../../view/header_admin.php") ?>
 
 <?php 
 
@@ -53,4 +53,4 @@
 </main>
 
 
-<?php include("../view/footer.php") ?>
+<?php include("../../view/footer.php") ?>

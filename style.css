@@ -1,6 +1,6 @@
 :root {
     --header: #000; /* para el header */
-    --background: #101010; /* para el background */
+    --background: #161616; /* para el background */
     --footer: #242323; /* para el footer */
     --card: #0B0B0B; /* para los cards con la informacion*/
     --details: #78D3CF; /* para los detalles de los botones y demas */
@@ -19,10 +19,6 @@
 
 /* Estilos para el Header */
 
-header h1 {
-    font-size: xxx-large;
-}
-
 header {
     background-color: var(--header);
     width: 100%;
@@ -30,6 +26,10 @@ header {
     align-items: center;
     justify-content: space-around;
     padding: 20px;
+}
+
+header a {
+    text-decoration: none;
 }
 
 nav ul {
@@ -54,7 +54,7 @@ header a:hover{
 footer {
     background-color: var(--footer);
     width: 100%;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 #footer-info {
@@ -96,32 +96,33 @@ hr {
 }
 
 #home-view h1 {
-    font-size: xx-large;
     margin: 25px;
+}
+
+#home-button {
+    background-color: var(--details);
 }
 
 .button {
     text-decoration: none;
-    background-color: var(--details);
-    padding: 10px 20px;
+    padding: 5px 20px;
     border-radius: 20px;
     font-size: 1em;
+    background-color: transparent;
+    border: 2px solid var(--details);
+}
+.button:hover {
+    background-color: var(--details);
 }
 
-.button:hover {
+#home-button:hover {
     background-color: var(--hover);
 }
 
 /* Estilo para la informacion de las opurtunidades en la pagina principal */
 
-#container {
-    background-color: var(--background);
-    
-}
-
 h2 {
     text-align: center;
-    padding-top: 30px;
 }
 
 h3 {
@@ -138,9 +139,14 @@ h3 {
     padding: 20px;
 }
 
+#opportunities-info a {
+    text-decoration: none;
+}
+
 .opportunity-info-card {
     background-color: var(--card);
     width: 300px;
+    min-height: 350px;
     text-align: justify;
     padding: 20px;
     border-radius: 20px;
@@ -153,14 +159,166 @@ h3 {
     padding: 10px;
 }
 
-/* Estoilo para la pagina de perfil de los contribuyentes */
+/* Estilo para la pagina de perfil de los contribuyentes */
 
-#profile-container{
+main{
     background-color: var(--background);
+    margin: auto;
+    padding: 20px 0;;
 }
 
-#profile-container h1 {
+h1 , h2{
     text-align: center;
+    padding: 20px;
+}
+
+#profile {
+    width: 50%;
+    margin: auto;
+}
+
+.profile-info {
+    display: flex;
+    margin: auto;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+input, select{
+    max-width: 300px;
+    min-width: 300px;
+    border-radius: 20px;
+    border: none;
+    padding: 5px 15px;
+    background-color: var(--font);
+    color: var(--header)
+}
+
+label {
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+.profile-info div{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+#profile a {
+    display: inline-block;
+    margin: 20px 0;
+}
+
+/* Estilo para las oportunidades del perfil */
+
+#profile-opportunities {
+    width: 50%;
+    margin: auto;
+    padding: 30px 0;
+}
+
+#profile-opportunities h2 {
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+#profile-opportunities h3 {
+    padding: 0;
+}
+
+#profile-opportunities img{
+    width: 25px;
+}
+
+#profile-opportunities a{
+    text-align: right;
+}
+
+.profile-opportunity-card {
+    background-color: var(--card);
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    align-items: center;
+    border-radius: 20px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.profile-opportunity-card:hover {
+    box-shadow: 0px 0px 10px var(--details);
+}
+
+.opportunity-options {
+    display: flex;
+    gap: 15px;
+}
+#profile-opportunities-info {
+    text-align: right;
+}
+
+/* Estilos de la pagina editar perfil */
+#profile-edit-container{
+    background-color: var(--background);
+    min-height: 70vh;
+    max-height: 200vh;
+}
+
+#edit-profile-form{
+    width: 50%;
+    margin: auto;
+    align-content: center;
+    min-height: 40vh;
+    max-height: 70vh;
+}
+#edit-profile-form #save-button{
+    margin-top: 20px;
+}
+input.button {
+    color: var(--font);
+}
+
+/* Estilos para añadir o editar una oportunidad */
+#add-edit-opportunity {
+    width: 53%;
+    margin: 20px auto;
+    padding: 40px;
+    background-color: var(--card);
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+}
+#opportunity-info-form div {
+    display: flex;
+    flex-direction: column;
+}
+
+#opportunity-info-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: var(--card);
+}
+textarea#description{
+    border-radius: 20px;
+    color: var(--header);
+    padding: 5px 15px;
+    border: none;
+}
+#description-instruction {
+    margin: 20px 0;
+}
+#description-instruction li{
+    margin-left: 20px;
+}
+.submit-button{
+    max-width: 100px;
+    min-width: 100px;
+    margin: auto;
+    margin-top: 10px;
 }
 
 
@@ -174,3 +332,36 @@ h3 {
 
 
 
+
+
+
+/* Estilos para el ADMIN */
+
+/* Estilos para la pagina de inicio */
+#menu-options{
+    display: flex;
+    width: 60%;
+    margin: 40px auto;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+
+.menu-card{
+    background-color: var(--card);
+    border-radius: 20px;
+    min-width: 350px;
+    text-align: center;
+    min-height: 40vh;
+}
+#menu-options a{
+    text-decoration: none;
+}
+.menu-card:hover{
+    box-shadow: 0px 0px 10px var(--details);
+}
+.menu-card img {
+    width: 180px;
+    
+}

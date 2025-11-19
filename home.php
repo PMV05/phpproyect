@@ -3,15 +3,15 @@
 <!-- Imagen de bienvenida -->
 <div id="home-view">
     <h1>Únete a nuestra comunidad y recibe lo último.</h1>
-    <a class="button" href="/">Suscribirme</a>
+    <a class="button" id="home-button" href="<?php echo $app_path . "suscribe/"?>">Suscribirme</a>
 </div>
 
 <!-- Se muestra la describcion de cada una de las oportunidades que estaran disponibles -->
-<div id="container">
+<main>
     <h2>Oportunidades</h2>
 
     <div id="opportunities-info">
-        <a>
+        <a href="<?php echo $app_path . "opportunity/"?>">
             <div class="opportunity-info-card">
                 <h3>Trabajos</h3>
                 <p>
@@ -24,7 +24,7 @@
             </div>
         </a>
 
-        <a>
+        <a href="<?php echo $app_path . "opportunity/"?>">
             <div class="opportunity-info-card">
                 <h3>Internados</h3>
                 <p>
@@ -37,7 +37,7 @@
             </div>
         </a>
 
-        <a>
+        <a href="<?php echo $app_path . "opportunity/"?>">
             <div class="opportunity-info-card">
                 <h3>Becas</h3>
                 <p>
@@ -50,7 +50,7 @@
             </div>
         </a>
 
-        <a>
+        <a href="<?php echo $app_path . "opportunity/"?>">
             <div class="opportunity-info-card">
                 <h3>Proyectos de Investigación</h3>
                 <p>
@@ -62,4 +62,4 @@
             </div>
         </a>
     </div>
-</div>
+</main>
