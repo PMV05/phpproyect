@@ -2,7 +2,7 @@
     include("../../util/main.php");
     include("../../view/header_admin.php");
 
-    $opportunities = [1 => "Trabajo", 2 => "Intenardo", 3 => "Beca", 4 => "Proyecto de Investigación"];
+    $opportunities = [1 => "Trabajo", 2 => "Internado", 3 => "Beca", 4 => "Proyecto de Investigación"];
 
 ?>
 
