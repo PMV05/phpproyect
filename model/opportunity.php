@@ -2,23 +2,38 @@
 <?php
 
 class Opportunity {
+    private string $title = "";
+    private string $description = "";
+    private string $sponsor = "";
+    private string $url = "";
+    private string $attachment = "";
     private DateTime $datePosted;
     private DateTime $deadline;
+    private string $type = "";
+    private string $author = "";
+    
 
     // Constructor para inicializar los atributos de la clase
     public function __construct(
-        private string $title = "",
-        private string $description = "",
-        private string $sponsor = "",
-        private string $url = "",
-        private string $attachment = "",
+        string $title = "",
+        string $description = "",
+        string $sponsor = "",
+        string $url = "",
+        string $attachment = "",
         string $datePosted = "",
         string $deadline = "",
-        private string $type = "",
-        private string $author = ""
+        string $type = "",
+        string $author = ""
     ) {
+        $this->title = $title;
+        $this->description = $description;
+        $this->sponsor = $sponsor;
+        $this->url = $url;
+        $this->attachment = $attachment;
         $this->datePosted = new DateTime($datePosted);
         $this->deadline = new DateTime($deadline);
+        $this->type = $type;
+        $this->author = $author;
     }
 
     # setTitle()

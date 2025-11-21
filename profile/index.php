@@ -1,0 +1,1 @@
+<?php include("profile_view.php"); ?>
