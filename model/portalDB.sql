@@ -24,30 +24,21 @@ CREATE TABLE opportunities (
   datePosted      DATE           NOT NULL  DEFAULT (CURRENT_DATE),
   PRIMARY KEY (oppID),
   INDEX ownerUserID (ownerUserID),
-  CONSTRAINT fk_opportunities_owner
-      FOREIGN KEY (ownerUserID)
-      REFERENCES users(userID)
-      ON UPDATE CASCADE
-      ON DELETE RESTRICT
+  FOREIGN KEY (ownerUserID)
+
 );
 
 CREATE TABLE distribution_list (
   email     VARCHAR(150) NOT NULL,
   PRIMARY KEY (email),
-  CONSTRAINT fk_distribution_user
-      FOREIGN KEY (email)
-      REFERENCES users(email)
-      ON UPDATE CASCADE
-      ON DELETE CASCADE
 );
 
--- (optional) create an application user
 CREATE USER IF NOT EXISTS user@localhost
 IDENTIFIED BY '';
 
 CREATE USER IF NOT EXISTS admin@localhost
 IDENTIFIED BY '';
--- grant privileges to the application user
+
 GRANT SELECT, INSERT, UPDATE, DELETE
 ON portalDB.*
 TO admin@localhost;
