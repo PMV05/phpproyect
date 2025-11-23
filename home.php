@@ -13,7 +13,7 @@
     <div id="opportunities-info">
         <a href="<?php echo $app_path . "opportunity/"?>">
             <div class="opportunity-info-card">
-                <h3>Trabajos</h3>
+                <h3>Empleos</h3>
                 <p>
                     Oportunidades de trabajo remunerado en empresas u organizaciones, 
                     donde los profesionales contribuyen con sus habilidades a proyectos 
