@@ -2,19 +2,22 @@
 <?php
 
 class Opportunity {
-    private string $title = "";
-    private string $description = "";
-    private string $sponsor = "";
-    private string $url = "";
-    private string $attachment = "";
+    private int $id;
+    private string $title;
+    private string $description;
+    private string $sponsor;
+    private string $url;
+    private string $attachment;
     private DateTime $datePosted;
     private DateTime $deadline;
-    private string $type = "";
-    private string $author = "";
+    private int $type;
+    private string $author;
+    private string $typeName;
     
 
     // Constructor para inicializar los atributos de la clase
     public function __construct(
+        int $id = 0,
         string $title = "",
         string $description = "",
         string $sponsor = "",
@@ -22,9 +25,11 @@ class Opportunity {
         string $attachment = "",
         string $datePosted = "",
         string $deadline = "",
-        string $type = "",
-        string $author = ""
+        int $type = 0,
+        string $author = "",
+        string $typeName = ""
     ) {
+        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->sponsor = $sponsor;
@@ -34,6 +39,21 @@ class Opportunity {
         $this->deadline = new DateTime($deadline);
         $this->type = $type;
         $this->author = $author;
+        $this->typeName = $typeName;
+    }
+
+    # setId()
+    #
+    # Asigna valor al atributo de id
+    # Recibe: el id de la oportunidad 
+    public function setId(int $id){
+        $this->id = $id;
+    }
+    # getId()
+    #
+    # Devuelve el valor del atributo id
+    public function getId(){
+        return $this->id;
     }
 
     # setTitle()
@@ -117,7 +137,7 @@ class Opportunity {
     #
     # Devuelve el valor del atributo datePosted
     public function getDatePosted(){
-        return $this->datePosted;
+        return $this->datePosted->format('d/m/y');
     }
     
     # setDeadline()
@@ -131,14 +151,14 @@ class Opportunity {
     #
     # Devuelve el valor del atributo deadline
     public function getDeadline(){
-        return $this->deadline;
+        return $this->deadline->format('d/m/y');
     }
 
     # setType()
     #
     # Asigna valor al atributo de type
     # Recibe: el tipo de la oportunidad 
-    public function setType(string $type){
+    public function setType(int $type){
         $this->type = $type;
     }
     # getType()
@@ -146,6 +166,20 @@ class Opportunity {
     # Devuelve el valor del atributo type
     public function getType(){
         return $this->type;
+    }
+
+    # setTypeName()
+    #
+    # Asigna valor al atributo de type
+    # Recibe: el nombre del tipo de la oportunidad 
+    public function setTypeName(string $type){
+        $this->type = $typeName;
+    }
+    # getType()
+    #
+    # Devuelve el valor del atributo typeName
+    public function getTypeName(){
+        return $this->typeName;
     }
 
     # setAuthor()
