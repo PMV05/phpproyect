@@ -187,12 +187,10 @@
             $query = 'SELECT *
                       FROM opportunities o
                       INNER JOIN opportunities_type t
-                        ON o.oppType = t.typeID
-                      WHERE o.ownerUserID = :userId';
+                        ON o.oppType = t.typeID';
                       
             try {
                 $statement = $db->prepare($query);
-                $statement->bindValue(':user_id', $user_id);
                 $statement->execute();
                 $rows = $statement->fetchAll();
                 $statement->closeCursor();
@@ -202,15 +200,31 @@
                 if($rows) {
                     $opportunities = [];
 
-                    foreach($rows as $row) 
-                        $opportunities = new Opportunity($row['oppID'], $row['title'], $row['description'], $row['sponsor'], $row['url'],
-                                                         $row['attachmentPath'], $row['datePosted'], $row['deadline'], $row['typeID'], $row['userID'], $row['typeName']);
+            foreach($rows as $row) {
+                // 👇 Evitar nulls, convertir a strings vacíos
+                $attachment = $row['attachmentPath'] ?? '';
+                $url        = $row['url'] ?? '';
+                $datePosted = $row['datePosted'] ?? '';
+                $deadline   = $row['deadline'] ?? '';
+
+                $opportunities[] = new Opportunity(
+                    $row['oppID'],
+                    $row['title'],
+                    $row['description'],
+                    $row['sponsor'],
+                    $url,
+                    $attachment,
+                    $datePosted,
+                    $deadline,
+                    $row['typeID'],
+                    $row['ownerUserID'],
+                    $row['typeName']
+                );
+            }
                     
                     return $opportunities;
                 }
-                // Si no hay oportunidades devuelve null
-                else 
-                    return null;
+
 
             } catch (PDOException $e) {
                 Database::displayError($e->getMessage());

@@ -172,8 +172,8 @@ class Opportunity {
     #
     # Asigna valor al atributo de type
     # Recibe: el nombre del tipo de la oportunidad 
-    public function setTypeName(string $type){
-        $this->type = $typeName;
+    public function setTypeName(string $typeName){
+        $this->typeName = $typeName;
     }
     # getType()
     #

@@ -1,0 +1,118 @@
+
+main {
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.intro-text {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 20px;
+}
+
+.top-actions {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.empty-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.opportunity-info-card {
+    background: #f7f7f7;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.info {
+    font-size: 0.9em;
+    opacity: 0.85;
+    margin-bottom: 5px;
+}
+
+.date {
+    font-size: 0.85em;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.button {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #0066cc;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: #004c99;
+}
+
+.btn-add {
+    background-color: var(--details);
+    border-radius: 50%;
+    font-size: 1.6em;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 35px;
+    display: inline-block;
+    margin-bottom: 15px;
+    float: right;
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.editar {
+    color: var(--details);
+}
+
+.eliminar {
+    color: #f44336;
+}
+
+.add-container {
+    grid-column: 1 / -1;
+    text-align: right;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.delete-form {
+    margin: 0;
+}
+
+.button-small {
+    padding: 3px 10px;
+    font-size: 0.85em;
+}
+
+.button-danger {
+    border-color: #ff4b4b;
+    color: #ff4b4b;
+}
+
+.button-danger:hover {
+    background-color: #ff4b4b;
+    color: #000;
+}

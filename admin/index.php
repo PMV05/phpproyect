@@ -23,7 +23,7 @@
                 <img src="<?php echo $app_path . "images/opportunity.png" ?>" />
             </div>
         </a>
-        <a href="<?php echo $app_path . "admin/profile/"?>" >
+        <a href="<?php echo $app_path . "admin/account/"?>" >
             <div class="menu-card">
                 <h2>Cuentas</h2>
                 <img src="<?php echo $app_path . "images/user.png" ?>" />

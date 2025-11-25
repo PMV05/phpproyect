@@ -1,15 +1,63 @@
 <?php
-    include("../../util/main.php");
-    include("../../view/header_admin.php");
+include("../../util/main.php");
+include("../../view/header_admin.php");
+require_once "../../model/db.php";
+require_once "../../model/opportunity_db.php";
 
-    $opportunities = [1 => "Trabajo", 2 => "Internado", 3 => "Beca", 4 => "Proyecto de Investigación"];
+$db = Database::getDB();
+$stmt = $db->prepare("SELECT typeID, typeName FROM opportunities_type");
+$stmt->execute();
+$opportunities_types = $stmt->fetchAll();
+$stmt->closeCursor();
+
+$ownerUserID = "admin";
+
+$error = "";
+
+    $title       = trim($_POST["title"] ?? "");
+    $sponsor     = trim($_POST["sponsor"] ?? "");
+    $type        = intval($_POST["type"] ?? 0);
+    $deadline    = $_POST["deadline"] ?? null;
+    $url         = trim($_POST["url"] ?? "");
+    $description = trim($_POST["description"] ?? "");
+    $attachment  = null; 
+
+    if ($title === "" || $description === "" || $type === 0) {
+        $error = "Debe llenar el título, la descripción y seleccionar un tipo.";
+    }
+    
+    else {
+    $opportunity = new Opportunity(
+        0,
+        $title,
+        $description,
+        $sponsor,
+        $url !== "" ? $url : "",
+        $attachment !== "" ? $attachment : "",
+        date("d-m-Y"),
+        $deadline !== "" ? $deadline : null,
+        $type,
+        $ownerUserID,
+        ""
+    );
+
+    OpportunityDB::addOpportunity($opportunity);
+
+    header("Location: index.php");
+    exit;
+}
 
 ?>
 
+<link rel="stylesheet" href="admin.css">
 <main>
     <h1>Añadir Oportunidad</h1>
 
-    <form action="." method="post" id="add-edit-opportunity">
+    <?php if (!empty($error)): ?>
+        <p style="color:red; text-align:center;"><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
+
+    <form method="post" id="add-edit-opportunity">
         <div id="opportunity-info-form">
             <div>
                 <label for="title">Título:</label>
@@ -21,14 +69,17 @@
             </div>
             <div>
                 <label for="type">Tipo:</label>
-                <select id="opportunity-type">
-                    <?php foreach($opportunities as $id => $opportunity) :?>
-                        <option value="<?php echo $id; ?>"><?php echo $opportunity; ?></option>
-                    <?php endforeach?>
+
+                <select id="opportunity-type" name="type">
+                    <?php foreach($opportunities_types as $t): ?>
+                        <option value="<?= $t['typeID']; ?>">
+                            <?= htmlspecialchars($t['typeName']); ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div>
-                <label for="deadline">Fecha límite:</label>
+                <label for="deadline">Deadline:</label>
                 <input type="date" id="deadline" name="deadline">
             </div>
             <div>
@@ -36,7 +87,7 @@
                 <input type="text" id="url" name="url">
             </div>
             <div>
-                <label for="attachment">Adjunto:</label>
+                <label for="attachment">Archivo:</label>
                 <input type="file" id="attachment" name="attachment">
             </div>
         </div>
@@ -49,9 +100,9 @@
             <ul>
                 <li>Use dos saltos de línea para comenzar un nuevo párrafo.</li>
                 <li>Use un asterisco para marcar elementos en una lista con "bullet".</li>
-                <li>Use un salto de línea entre elementos con una lista con "bullet".</li>
-                <li>Use [b][/b] para poner text en negrita.</li>
-                <li>Use [i][/i] para poner texto en itálica.</li>
+                <li>Use un salto de línea entre elementos de la lista.</li>
+                <li>Use [b][/b] para texto en negrita.</li>
+                <li>Use [i][/i] para texto en itálica.</li>
             </ul>
         </div>
 
