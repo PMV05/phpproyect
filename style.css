@@ -320,8 +320,10 @@ textarea#description{
     margin: auto;
     margin-top: 10px;
 }
-
-
+.submit-button-img {
+    background-color: transparent;
+    border: none;
+}
 
 
 
