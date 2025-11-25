@@ -1,0 +1,75 @@
+body {
+    background-color: #0f0f0f;
+}
+
+/* Sección */
+.section {
+    text-align: center;
+    padding: 90px 0;
+    background: #0f0f0f;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Título */
+.title {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+/* Texto */
+.text {
+    font-size: 24px;
+    margin-bottom: 70px;
+}
+
+/* Caja del formulario */
+.form-box {
+    margin: 0 auto;
+    padding: 50px;
+    width: 65%;
+    background: #0c0c0c;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+/* Label */
+.form-box label {
+    font-size: 22px;
+}
+
+/* INPUT MÁS LARGO */
+.form-box input {
+    width: 80%;
+    max-width: 620px;
+    padding: 14px 20px;
+    border-radius: 30px;
+    border: none;
+    background: #dedede;
+    font-size: 18px;
+    outline: none;
+}
+
+/* Botón */
+.btn-main {
+    padding: 10px 26px;
+    border-radius: 20px;
+    border: 2px solid #79dbd3;
+    background: transparent;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+/* HOVER */
+.btn-main:hover {
+    background-color: #79dbd3;
+    color: #000;
+    border-color: #79dbd3;
+    transform: scale(1.05);
+}
