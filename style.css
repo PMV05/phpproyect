@@ -6,6 +6,7 @@
     --details: #78D3CF; /* para los detalles de los botones y demas */
     --hover: #06635F; /* para el hover de los botones */
     --font: #fff; /* para el font*/
+    --error: #c10707; /* para los mensajes de error */
 }
 
 
@@ -325,6 +326,10 @@ textarea#description{
     border: none;
 }
 
+/* Mensajes de error */
+.error-message {
+    color: var(--error);
+}
 
 
 

@@ -2,6 +2,7 @@
     require_once("../util/main.php");
     require_once("../model/opportunity.php");
     require_once("../model/opportunity_db.php");
+    require_once("../model/validate.php");
 
     // $opportunityId = filter_input(INPUT_POST, 'opportunityId', FILTER_VALIDATE_INT);
     $action = filter_input(INPUT_POST, 'action');
@@ -28,6 +29,8 @@
 
         // Muestra el formulario para añadir o editar una oportunidad
         case 'add_edit_opportunity_form':
+            // Recibe el id de la oportunidad seleccionada, para recibir un objeto de la oportunidad 
+            // seleccionada en el caso de que no exista se crea un nuevo objeto 
             $opportunityId = filter_input(INPUT_POST, 'opportunityId', FILTER_VALIDATE_INT);
             $opportunities_type = OpportunityDB::getOpportunitiesType();
 
@@ -41,16 +44,52 @@
 
         // Accion para añadir una oportunidad
         case 'add_opportunity':
+            // IMPORTANTE: ENVIAR EMAIL DE LA LISTA DE DISTRIBUCION
+
+            // Lista de los mensajes de error
+            $errorMessage= [] ;
+
+            $opportunities_type = OpportunityDB::getOpportunitiesType();
+
+            $type = filter_input(INPUT_POST, 'type', FILTER_VALIDATE_INT);
+            $title = filter_input(INPUT_POST, 'title');
+            $description = filter_input(INPUT_POST, 'description');
+            $sponsor = filter_input(INPUT_POST, 'sponsor');
+            $url = filter_input(INPUT_POST, 'url');
+
             $opportunity = new Opportunity();
-            $opportunity->setType(filter_input(INPUT_POST, 'type', FILTER_VALIDATE_INT));
+
+            // Se validan los campos
+
+            if(!validate\type($type))
+                $errorMessage['type'] = 'Escoge un tipo';
+            
+            if(!validate\title($title))
+                $errorMessage['title'] = 'Coloca un título';
+
+            if(!validate\description($description))
+                $errorMessage['description'] = 'Coloca una descripción';
+
+            if(!validate\sponsor($sponsor))
+                $errorMessage['sponsor'] = 'Coloca un patrocinador';
+
+            if($url != "")
+                if(!validate\url($url))
+                    $errorMessage['url'] = 'Entre un url válido';
+
+            if(count($errorMessage) > 0){
+                include("../opportunity/opportunity_add_edit.php");
+                exit;
+            }
+
+            $opportunity->setType($type);
             $opportunity->setAuthor(filter_input(INPUT_POST, 'userId'));
-            $opportunity->setTitle(filter_input(INPUT_POST, 'title'));
-            $opportunity->setDescription(filter_input(INPUT_POST, 'description'));
-            $opportunity->setSponsor(filter_input(INPUT_POST, 'sponsor'));
-            $opportunity->setURL(filter_input(INPUT_POST, 'url'));
+            $opportunity->setTitle($title);
+            $opportunity->setDescription($description);
+            $opportunity->setSponsor($sponsor);
+            $opportunity->setURL($url);
             $opportunity->setAttachment(filter_input(INPUT_POST, 'attachment'));
             $opportunity->setDeadline(filter_input(INPUT_POST, 'deadline'));
-
 
             OpportunityDB::addOpportunity($opportunity);
             header("Location: .");
@@ -58,7 +97,7 @@
 
         // Accion para eliminar unaoportunidad
         case "delete_opportunity":
-            
+            // Recibe el id de la oportunidad que se va a eliminar
             $opportunityId = filter_input(INPUT_POST, "opportunityId", FILTER_VALIDATE_INT);
             
             OpportunityDB::deleteOpportunity($opportunityId);
@@ -68,13 +107,43 @@
 
         // Accion para editar una oportunidad
         case "edit_opportunity":
+            $type = filter_input(INPUT_POST, 'type', FILTER_VALIDATE_INT);
+            $title = filter_input(INPUT_POST, 'title');
+            $description = filter_input(INPUT_POST, 'description');
+            $sponsor = filter_input(INPUT_POST, 'sponsor');
+            $url = filter_input(INPUT_POST, 'url');
+
             $opportunity = new Opportunity();
+
+            // Se validan los campos
+
+            if(!validate\type($type))
+                $errorMessage['type'] = 'Escoge un tipo';
+            
+            if(!validate\title($title))
+                $errorMessage['title'] = 'Coloca un título';
+
+            if(!validate\description($description))
+                $errorMessage['description'] = 'Coloca una descripción';
+
+            if(!validate\sponsor($sponsor))
+                $errorMessage['sponsor'] = 'Coloca un patrocinador';
+
+            if($url != "")
+                if(!validate\url($url))
+                    $errorMessage['url'] = 'Entre un url válido';
+
+            if(count($errorMessage) > 0){
+                include("../opportunity/opportunity_add_edit.php");
+                exit;
+            }
+
             $opportunity->setId(filter_input(INPUT_POST, 'opportunityId', FILTER_VALIDATE_INT));
-            $opportunity->setType(filter_input(INPUT_POST, 'type', FILTER_VALIDATE_INT));
-            $opportunity->setTitle(filter_input(INPUT_POST, 'title'));
-            $opportunity->setDescription(filter_input(INPUT_POST, 'description'));
-            $opportunity->setSponsor(filter_input(INPUT_POST, 'sponsor'));
-            $opportunity->setURL(filter_input(INPUT_POST, 'url'));
+            $opportunity->setType($type);
+            $opportunity->setTitle($title);
+            $opportunity->setDescription($description);
+            $opportunity->setSponsor($sponsor);
+            $opportunity->setURL($url);
             $opportunity->setAttachment(filter_input(INPUT_POST, 'attachment'));
             $opportunity->setDeadline(filter_input(INPUT_POST, 'deadline'));
             
