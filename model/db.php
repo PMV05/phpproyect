@@ -1,10 +1,8 @@
-<!-- 
-    Clase Database
-    
-    Permite conectarse con la base de datos opportuniHubDB
--->
-
 <?php
+        // Clase Database
+        
+        // Permite conectarse con la base de datos opportuniHubDB
+
     class Database {
         private static $dsn = 'mysql:host=localhost;dbname=opportuniHubDB';
         private static $username = 'root';

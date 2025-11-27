@@ -107,6 +107,9 @@
 
         // Accion para editar una oportunidad
         case "edit_opportunity":
+            // Lista de los mensajes de error
+            $errorMessage= [] ; 
+
             $type = filter_input(INPUT_POST, 'type', FILTER_VALIDATE_INT);
             $title = filter_input(INPUT_POST, 'title');
             $description = filter_input(INPUT_POST, 'description');
