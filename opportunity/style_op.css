@@ -151,13 +151,13 @@ nav a:hover {
 .filtros div {
     display: flex;
     width: 100%;
-    padding: 20px;
+    padding: 20px 0;
+    justify-content: space-evenly;
 }
 
 .guardar {
     padding: 0 20px;
     height: 35px;
-    margin: auto;
     /* padding: 12px 16px; */
     border-radius: 20px;
     border: 2px solid var(--details);
@@ -332,5 +332,5 @@ hr {
     padding: 20px 50px;
 }
 .desc-list {
-    margin-left: 20px;
+    margin-left: 20px;
 }

@@ -1,25 +1,26 @@
 <?php
-    # Clase para guardar la informaci0n de lo usuario
+    # Clase para guardar la informacion de los usuarios
 
     class User {
         private string $userID ;
         private string $email ;
         private string $password ;
         private int $userRole ;
+        private string $roleName ;
 
         # Constructor para inicializar los atributos de la clase
         public function __construct(
             string $userID = "",
             string $email = "",
             string $password = "",
-            int $userRole = 0
-        ) 
-        
-        {
+            int $userRole = 0,
+            string $roleName
+        ){
             $this->userID = $userID;
             $this->email = $email;
             $this->password = $password;
             $this->userRole = $userRole;
+            $this->roleName = $roleName;
         }
 
         # setUserID()
@@ -80,6 +81,21 @@
         # Devuelve el valor del atributo userRole
         public function getUserRole(){
             return $this->userRole;
+        }
+
+        # setRoleName()
+        #
+        # Asigna valor al atributo roleName
+        # Recibe: el nombre del rol del usuario 
+        public function setRoleName(string $roleName){
+            $this->roleName = $roleName;
+        }
+
+        # getRoleName()
+        #
+        # Devuelve el valor del atributo roleName
+        public function getRoleName(){
+            return $this->roleName;
         }
     }
 ?>

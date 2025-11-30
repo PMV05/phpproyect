@@ -1,172 +1,199 @@
 <?php
+    // Clase que tendra los cruds para los usuarios
+    require_once ('model/db.php');
 
-require_once ('model/db.php');
+    class UserDB {
 
-class UserDB {
-
-    # get_users()
-    #
-    # Devuelve todos los usuarios registrados en la base de datos
-    # Retorna: un arreglo con los usuarios o un arreglo vacio si ocurre un error
-    public static function get_users() {
-
-        $query = 'SELECT userID, email, password, role
-                  FROM users
-                  ORDER BY userID ASC';
-
-        try {
+        # getAllUsers()
+        #
+        # Devuelve todos los usuarios registrados en la base de datos
+        # Retorna: lista de objetos tipo User con todos los usuarios
+        public static function getAllUsers() {
             $db = Database::getDB();
+            $query = 'SELECT *
+                    FROM users u 
+                    INNER JOIN roles r
+                        ON u.userRole = r.roleID
+                    ORDER BY userID ASC';
 
-            $statement = $db->prepare($query);
-            $statement->execute();
-            $users = $statement->fetchAll();
-            $statement->closeCursor();
+            try {
+                $statement = $db->prepare($query);
+                $statement->execute();
+                $rows = $statement->fetchAll();
+                $statement->closeCursor();
 
-            return $users;
+                // Añade en una lista de objeto tipo User todos
+                // los usuarios que hay en la base de datos
+                if($rows) {
+                    $users = [];
 
-        } catch (PDOException $e) {
-            return [];
+                    foreach($rows as $row) {
+                        $users[] = new User(
+                            $row['userID'],
+                            $row['email'],
+                            $row['password'],
+                            $row['userRole'],
+                            $row['roleName']
+                        );
+                    }
+                        
+                    return $users;
+                }
+
+            } catch (PDOException $e) {
+                Database::displayError($e->getMessage());
+            }
+        }
+
+        # getUserById()
+        #
+        # Devuelve la informacion de un usuario segun su ID
+        # Recibe: el ID del usuario
+        # Retorna: los datos del usuario con un objeto o null si no existe o ocurre un error
+        public static function getUserById($userID) {
+            $db = Database::getDB();
+            $query = 'SELECT *
+                    FROM users u 
+                    INNER JOIN roles r
+                        ON u.userRole = r.roleID
+                    WHERE userID = :userID';
+
+            try {
+                $statement = $db->prepare($query);
+                $statement->bindValue(':userID', $userID);
+                $statement->execute();
+
+                $row = $statement->fetch();
+                $statement->closeCursor();
+
+                if($row) 
+                    return new User(
+                            $row['userID'],
+                            $row['email'],
+                            $row['password'],
+                            $row['userRole'],
+                            $row['roleName']
+                        );
+                else 
+                    return null;
+
+
+            } catch (PDOException $e) {
+                Database::displayError($e->getMessage());
+            }
+        }
+
+        # getUserByEmail()
+        #
+        # Obtiene un usuario utilizando su email
+        # Recibe: el email del usuario
+        # Retorna: los datos del usuario o null si no existe o ocurre un error
+        public static function getUserByEmail($email) {
+            $db = Database::getDB();
+            $query = 'SELECT *
+                    FROM users u 
+                    INNER JOIN roles r
+                        ON u.userRole = r.roleID
+                    WHERE email = :email';
+
+            try {
+                $statement = $db->prepare($query);
+                $statement->bindValue(':email', $email);
+                $statement->execute();
+                $row = $statement->fetch();
+                $statement->closeCursor();
+
+                if($row) 
+                    return new User(
+                            $row['userID'],
+                            $row['email'],
+                            $row['password'],
+                            $row['userRole'],
+                            $row['roleName']
+                        );
+                else 
+                    return null;
+
+            } catch (PDOException $e) {
+                Database::displayError($e->getMessage());
+            }
+        }
+
+        # addUser()
+        #
+        # Inserta un nuevo usuario en la base de datos
+        # Recibe: un objeto tipo User
+        # Retorna: el ID del usuario o un error
+        public static function addUser($user) {
+            $db = Database::getDB();
+            $query = 'INSERT INTO users (userID, email, password, role)
+                    VALUES (:userID, :email, :password, :role)';
+
+            try {
+                $statement = $db->prepare($query);
+                $statement->bindValue(':userID', $user->getUserID());
+                $statement->bindValue(':email', $user->getEmail());
+                $statement->bindValue(':password', $user->getPassword());
+                $statement->bindValue(':role', $user->getRole());
+                $statement->execute();
+
+                $userID = $user->getUserID();
+                $statement->closeCursor();
+
+                return $userID;
+
+            } catch (PDOException $e) {
+                Database::displayError($e->getMessage());
+            }
+        }
+
+        # updateUser()
+        #
+        # Actualiza la informacion de un usuario
+        # Recibe: un objeto de tipo User
+        # Retorna: true si se actualizo, false si ocurrio un error
+        public static function updateUser($user) {
+            $db = Database::getDB();
+            $query = 'UPDATE users
+                    SET userID = :userID,
+                        email = :email,
+                        password = :password,
+                        role = :role
+                    WHERE userID = :userID';
+
+            try {
+                $statement = $db->prepare($query);
+                $statement->bindValue(':userID', $user->getUserID());
+                $statement->bindValue(':email', $user->getEmail());
+                $statement->bindValue(':password', $user->getPassword());
+                $statement->bindValue(':role', $user->getRole());
+                $statement->execute();
+
+                $statement->closeCursor();
+
+            } catch (PDOException $e) {
+                Database::displayError($e->getMessage());
+            }
+        }
+
+        # deleteUser()
+        #
+        # Elimina un usuario segun su ID
+        # Recibe: el ID del usuario
+        public static function deleteUser($userID) {
+            $db = Database::getDB();
+            $query = 'DELETE FROM users
+                    WHERE userID = :userID';
+
+            try {
+                $statement = $db->prepare($query);
+                $statement->bindValue(':userID', $userID);
+                $statement->execute();
+                $statement->closeCursor();
+
+            } catch (PDOException $e) {
+                Database::displayError($e->getMessage());
+            }
         }
     }
-
-    # get_user_by_id()
-    #
-    # Devuelve la informacion de un usuario segun su ID
-    # Recibe: el ID del usuario
-    # Retorna: los datos del usuario o null si no existe o ocurre un error
-    public static function get_user_by_id($userID) {
-
-        $query = 'SELECT userID, email, password, role
-                  FROM users
-                  WHERE userID = :userID';
-
-        try {
-            $db = Database::getDB();
-
-            $statement = $db->prepare($query);
-            $statement->bindValue(':userID', $userID);
-            $statement->execute();
-            $user = $statement->fetch();
-            $statement->closeCursor();
-
-            return $user ?: null;
-
-        } catch (PDOException $e) {
-            return null;
-        }
-    }
-
-    # get_user_by_email()
-    #
-    # Obtiene un usuario utilizando su email
-    # Recibe: el email del usuario
-    # Retorna: los datos del usuario o null si no existe o ocurre un error
-    public static function get_user_by_email($email) {
-
-        $query = 'SELECT userID, email, password, role
-                  FROM users
-                  WHERE email = :email';
-
-        try {
-            $db = Database::getDB();
-
-            $statement = $db->prepare($query);
-            $statement->bindValue(':email', $email);
-            $statement->execute();
-            $user = $statement->fetch();
-            $statement->closeCursor();
-
-            return $user ?: null;
-
-        } catch (PDOException $e) {
-            return null;
-        }
-    }
-
-    # add_user()
-    #
-    # Inserta un nuevo usuario en la base de datos
-    # Recibe: email, password y role del usuario
-    # Retorna: el ID creado o 0 si ocurre un error
-    public static function add_user($email, $password, $role) {
-
-        $query = 'INSERT INTO users (email, password, role)
-                  VALUES (:email, :password, :role)';
-
-        try {
-            $db = Database::getDB();
-
-            $statement = $db->prepare($query);
-            $statement->bindValue(':email', $email);
-            $statement->bindValue(':password', $password);
-            $statement->bindValue(':role', $role);
-            $statement->execute();
-
-            $userID = $db->lastInsertId();
-            $statement->closeCursor();
-
-            return $userID;
-
-        } catch (PDOException $e) {
-            return 0;
-        }
-    }
-
-    # update_user()
-    #
-    # Actualiza la informacion de un usuario
-    # Recibe: userID, email, password y role
-    # Retorna: true si se actualizo, false si ocurrio un error
-    public static function update_user($userID, $email, $password, $role) {
-
-        $query = 'UPDATE users
-                  SET email = :email,
-                      password = :password,
-                      role = :role
-                  WHERE userID = :userID';
-
-        try {
-            $db = Database::getDB();
-
-            $statement = $db->prepare($query);
-            $statement->bindValue(':userID', $userID);
-            $statement->bindValue(':email', $email);
-            $statement->bindValue(':password', $password);
-            $statement->bindValue(':role', $role);
-            $statement->execute();
-            $statement->closeCursor();
-
-            return true;
-
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-
-    # delete_user()
-    #
-    # Elimina un usuario segun su ID
-    # Recibe: el ID del usuario
-    # Retorna: true si se elimino o false si ocurrio un error
-    public static function delete_user($userID) {
-
-        $query = 'DELETE FROM users
-                  WHERE userID = :userID';
-
-        try {
-            $db = Database::getDB();
-
-            $statement = $db->prepare($query);
-            $statement->bindValue(':userID', $userID);
-            $statement->execute();
-            $statement->closeCursor();
-
-            return true;
-
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-}
-
 ?>

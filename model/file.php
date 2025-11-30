@@ -57,13 +57,9 @@
         public static function getFile($fileName) {
             global $app_path;
 
-            if(isset($_FILES[$fileName])) {
-                $app_path = str_replace('/', DIRECTORY_SEPARATOR, $app_path);
-                $app_path = str_replace('\\', DIRECTORY_SEPARATOR, $app_path);
-                return $app_path . "files". DIRECTORY_SEPARATOR . $fileName;
-            }
-            else
-                return "";
+            $app_path = str_replace('/', DIRECTORY_SEPARATOR, $app_path);
+            $app_path = str_replace('\\', DIRECTORY_SEPARATOR, $app_path);
+            return $app_path . "files". DIRECTORY_SEPARATOR . $fileName;
         }
 
         /*

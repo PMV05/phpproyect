@@ -1,4 +1,5 @@
 <?php
+    // Clase que tendra los cruds para las oportunidades
     require_once("db.php");
 
     class OpportunityDB {
@@ -31,8 +32,17 @@
                     $opportunities = [];
 
                     foreach($rows as $row) 
-                        $opportunities[] = new Opportunity($row['oppID'], $row['title'], $row['description'], $row['sponsor'], $row['url'],
-                                                         $row['attachmentPath'], $row['datePosted'], $row['deadline'], $row['typeID'], $row['ownerUserID'], $row['typeName']);
+                        $opportunities[] = new Opportunity($row['oppID'], 
+                                                            $row['title'], 
+                                                            $row['description'], 
+                                                            $row['sponsor'], 
+                                                            $row['url'], 
+                                                            $row['attachmentPath'], 
+                                                            $row['datePosted'], 
+                                                            $row['deadline'], 
+                                                            $row['typeID'], 
+                                                            $row['ownerUserID'], 
+                                                            $row['typeName']);
                     
                     return $opportunities;
                 }
@@ -50,7 +60,6 @@
 
             Añade una nueva oportunidad a la base de datos
             Parametros: objeto tipo Opportunity
-            Devuelve: una lista de objetos de tipo Opportunity
         */
         public static function addOpportunity($opportunity) {
             $db = Database::getDB();
@@ -86,7 +95,6 @@
 
             Elimina una oportunidad en la base de datos
             Parametros: id de la oportunidad a eliminar
-            Devuelve: una lista de objetos de tipo Opportunity
         */
         public static function deleteOpportunity($opportunityId) {
             $db = Database::getDB();
@@ -108,7 +116,6 @@
 
             Actualiza una oportunidad de la base de datos
             Parametros: id de la oportunidad a eliminar
-            Devuelve: una lista de objetos de tipo Opportunity
         */
         public static function updateOpportunity($opportunity) {
             $db = Database::getDB();
@@ -165,8 +172,19 @@
                 $statement->closeCursor();
 
                 if($row) 
-                    return new Opportunity($row['oppID'], $row['title'], $row['description'], $row['sponsor'], $row['url'],
-                                                         $row['attachmentPath'], $row['datePosted'], $row['deadline'], $row['typeID'], $row['ownerUserID'], $row['typeName']);
+                    return new Opportunity(
+                            $row['oppID'], 
+                            $row['title'], 
+                            $row['description'], 
+                            $row['sponsor'], 
+                            $row['url'],
+                            $row['attachmentPath'], 
+                            $row['datePosted'], 
+                            $row['deadline'], 
+                            $row['typeID'], 
+                            $row['ownerUserID'], 
+                            $row['typeName']
+                        );
                 
                 else 
                     return null;
@@ -200,27 +218,26 @@
                 if($rows) {
                     $opportunities = [];
 
-            foreach($rows as $row) {
-                // 👇 Evitar nulls, convertir a strings vacíos
-                $attachment = $row['attachmentPath'] ?? '';
-                $url        = $row['url'] ?? '';
-                $datePosted = $row['datePosted'] ?? '';
-                $deadline   = $row['deadline'] ?? '';
+                    foreach($rows as $row) {
+                        $attachment = $row['attachmentPath'] ?? '';
+                        $url        = $row['url'] ?? '';
+                        $datePosted = $row['datePosted'] ?? '';
+                        $deadline   = $row['deadline'] ?? '';
 
-                $opportunities[] = new Opportunity(
-                    $row['oppID'],
-                    $row['title'],
-                    $row['description'],
-                    $row['sponsor'],
-                    $url,
-                    $attachment,
-                    $datePosted,
-                    $deadline,
-                    $row['typeID'],
-                    $row['ownerUserID'],
-                    $row['typeName']
-                );
-            }
+                        $opportunities[] = new Opportunity(
+                            $row['oppID'],
+                            $row['title'],
+                            $row['description'],
+                            $row['sponsor'],
+                            $url,
+                            $attachment,
+                            $datePosted,
+                            $deadline,
+                            $row['typeID'],
+                            $row['ownerUserID'],
+                            $row['typeName']
+                        );
+                    }
                     
                     return $opportunities;
                 }

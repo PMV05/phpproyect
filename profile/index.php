@@ -1,7 +1,9 @@
 <?php 
     require_once("../util/main.php");
     require_once("../model/opportunity.php");
-    require_once("../model/opportunity_db.php");
+    require_once("../model/opportunity_db.php");    
+    require_once("../model/user.php");
+    require_once("../model/user_db.php");
     require_once("../model/distributionListdb.php");
     require_once("../model/validate.php");
     require_once("../model/file.php");
@@ -22,6 +24,8 @@
     switch($action) {
         // Accion por default para ver el perfil del usuario
         case 'view_profile':
+            $user = UserDB::getUserById($username);
+
             // Busca todas las oportunidades relacionadas al usuario
             $opportunities = OpportunityDB::getOpportunitiesByUserId($username);
 
