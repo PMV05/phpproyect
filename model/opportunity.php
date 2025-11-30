@@ -8,8 +8,8 @@
         private string $sponsor;
         private string $url;
         private string $attachment;
-        private DateTime $datePosted;
-        private DateTime $deadline;
+        private string $datePosted;
+        private string $deadline;
         private int $type;
         private string $author;
         private string $typeName;
@@ -35,8 +35,8 @@
             $this->sponsor = $sponsor;
             $this->url = $url;
             $this->attachment = $attachment;
-            $this->datePosted = new DateTime($datePosted);
-            $this->deadline = new DateTime($deadline);
+            $this->datePosted = $datePosted;
+            $this->deadline = $deadline;
             $this->type = $type;
             $this->author = $author;
             $this->typeName = $typeName;
@@ -131,13 +131,25 @@
         # Asigna valor al atributo de datePosted
         # Recibe: el dia que se publico la oportunidad 
         public function setDatePosted(string $datePosted){
-            $this->datePosted = new DateTime($datePosted);
+            $this->datePosted = $datePosted;
         }
         # getDatePosted()
         #
         # Devuelve el valor del atributo datePosted
         public function getDatePosted(){
-            return $this->datePosted->format('d/m/y');
+            return $this->datePosted;
+        }
+        # getDatePostedFormat()
+        #
+        # Devuelve el valor del atributo datePosted
+        public function getDatePostedFormat(){
+            if(!empty($this->datePosted)){
+                $date = new DateTime($this->datePosted);
+                return $date->format("d / m / Y");
+            }
+            else {
+                return "";
+            }
         }
         
         # setDeadline()
@@ -145,13 +157,26 @@
         # Asigna valor al atributo de deadline
         # Recibe: el dia que termina la oferta de la oportunidad 
         public function setDeadline(string $deadline){
-            $this->deadline = new DateTime($deadline);
+            $this->deadline = $deadline;
         }
         # getDeadline()
         #
         # Devuelve el valor del atributo deadline
         public function getDeadline(){
-            return $this->deadline->format('d/m/y');
+            return $this->deadline;
+        }
+        # getDeadlineFormat()
+        #
+        # Devuelve el valor del atributo datePosted
+        public function getDeadlineFormat(){
+            if($this->deadline != "0000-00-00"){
+                $date = new DateTime($this->deadline);
+                // return $date->format("d / m / Y");
+                return $this->deadline;
+            }
+            else {
+                return "";
+            }
         }
 
         # setType()

@@ -1,6 +1,5 @@
 <?php
-
-include("database.php");
+require_once("db.php");
 
 class DistributionListDB {
 
@@ -81,8 +80,13 @@ class DistributionListDB {
         try {
             $statement = $db->prepare($query);
             $statement->execute();
-            $emails = $statement->fetchAll();
+            $rows = $statement->fetchAll();
             $statement->closeCursor();
+
+            // Se crea una lista con todos los email de la base de datos
+            $emails = [];
+            foreach($rows as $row)
+                $emails[] = $row['email'];
             
             return $emails;
         } catch (PDOException $e) {
