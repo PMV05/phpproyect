@@ -1,6 +1,6 @@
 <?php
     // Clase que tendra los cruds para los usuarios
-    require_once ('model/db.php');
+    require_once ("db.php");
 
     class UserDB {
 
