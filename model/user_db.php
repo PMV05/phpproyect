@@ -126,7 +126,7 @@
         # Retorna: el ID del usuario o un error
         public static function addUser($user) {
             $db = Database::getDB();
-            $query = 'INSERT INTO users (userID, email, password, role)
+            $query = 'INSERT INTO users (userID, email, password, userRole)
                     VALUES (:userID, :email, :password, :role)';
 
             try {
@@ -134,7 +134,7 @@
                 $statement->bindValue(':userID', $user->getUserID());
                 $statement->bindValue(':email', $user->getEmail());
                 $statement->bindValue(':password', $user->getPassword());
-                $statement->bindValue(':role', $user->getRole());
+                $statement->bindValue(':role', $user->getUserRole());
                 $statement->execute();
 
                 $userID = $user->getUserID();
@@ -158,7 +158,7 @@
                     SET userID = :userID,
                         email = :email,
                         password = :password,
-                        role = :role
+                        userRole = :role
                     WHERE userID = :userID';
 
             try {
@@ -166,7 +166,7 @@
                 $statement->bindValue(':userID', $user->getUserID());
                 $statement->bindValue(':email', $user->getEmail());
                 $statement->bindValue(':password', $user->getPassword());
-                $statement->bindValue(':role', $user->getRole());
+                $statement->bindValue(':role', $user->getUserRole());
                 $statement->execute();
 
                 $statement->closeCursor();

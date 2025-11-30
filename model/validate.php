@@ -22,9 +22,9 @@
                       false si la contraseña no es valida
         */
         function password(string $password){
-            $pattern = '/^ (?=.*[[:digit:]]) (?=.*[[:upper:]]) (?=.*[[:lower:]]) (?=.*[[:punct:]]) [[:graph:]] {8,}$/';
+            $pattern = '/^(?=.*[[:digit:]])(?=.*[[:upper:]])(?=.*[[:lower:]])(?=.*[[:punct:]])[[:graph:]]{8,}$/';
 
-            return preg_match('[[:alnum:]]+[\.][[:alnum:]]+', $userID);
+            return preg_match($pattern, $password);
         } 
 
         /*
