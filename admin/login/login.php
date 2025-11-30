@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,39 +10,47 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+
+
   <div class="container" id="container">
+
     <!-- Formulario de Registrarse -->
     <div class="form-container sign-up-container">
-      <form action="#">
+      <form action="register_db.php" method="POST">
         <h1>Crear una Cuenta</h1>
-          <div class="social-container">
+
+        <div class="social-container">
           <a href="#" class="social"><i class="fa-brands fa-instagram"></i></a>
           <a href="#" class="social"><i class="fa-brands fa-facebook-f"></i></a>
           <a href="#" class="social"><i class="fa-brands fa-linkedin-in"></i></a>
         </div>
+
         <span>o usa tu email para registrarte</span>
 
         <div class="input-container">
           <i class="fa-solid fa-user"></i>
-          <input type="text" placeholder="Nombre Completo" required />
-        </div>
-        <div class="input-container">
-          <i class="fa-solid fa-envelope"></i>
-          <input type="email" placeholder="Correo Electrónico" required />
-        </div>
-        <div class="input-container">
-          <i class="fa-solid fa-lock"></i>
-          <input type="password" placeholder="Contraseña" required />
+          <input type="text" name="fullname" placeholder="Nombre Completo" required />
         </div>
 
-        <button>Registrarse</button>
+        <div class="input-container">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" name="email" placeholder="Correo Electrónico" required />
+        </div>
+
+        <div class="input-container">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" name="password" placeholder="Contraseña" required />
+        </div>
+
+        <button type="submit">Registrarse</button>
       </form>
     </div>
 
     <!-- Formulario de Iniciar Sesión -->
     <div class="form-container sign-in-container">
-      <form action="#">
+      <form action="login_db.php" method="POST">
         <h1>Iniciar Sesión</h1>
+
         <div class="social-container">
           <a href="#" class="social"><i class="fa-brands fa-instagram"></i></a>
           <a href="#" class="social"><i class="fa-brands fa-facebook-f"></i></a>
@@ -51,18 +61,19 @@
 
         <div class="input-container">
           <i class="fa-solid fa-envelope"></i>
-          <input type="email" placeholder="Correo Electrónico" required />
-        </div>
-        <div class="input-container">
-          <i class="fa-solid fa-lock"></i>
-          <input type="password" placeholder="Contraseña" required />
+          <input type="email" name="email" placeholder="Correo Electrónico" required />
         </div>
 
-        <button>Entrar</button>
+        <div class="input-container">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" name="password" placeholder="Contraseña" required />
+        </div>
+
+        <button type="submit">Entrar</button>
       </form>
     </div>
 
-    <!-- Panel de Bienvenida -->
+    <!-- Paneles -->
     <div class="overlay-container">
       <div class="overlay">
         <div class="overlay-panel overlay-left">
@@ -70,6 +81,7 @@
           <p>Para unirte a nuestra comunidad, por favor inicia sesión con tus datos personales</p>
           <button class="ghost" id="signIn">Iniciar Sesión</button>
         </div>
+
         <div class="overlay-panel overlay-right">
           <h1>¡Hola!</h1>
           <p>¿Aún no tienes cuenta? Regístrate y comienza a buscar oportunidades</p>
@@ -77,22 +89,22 @@
         </div>
       </div>
     </div>
+
   </div>
 
-  <script >
-
+  <script>
     const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
 
-signUpButton.addEventListener('click', () => {
-  container.classList.add("right-panel-active");
-});
+    signUpButton.addEventListener('click', () => {
+      container.classList.add("right-panel-active");
+    });
 
-signInButton.addEventListener('click', () => {
-  container.classList.remove("right-panel-active");
-});
-
+    signInButton.addEventListener('click', () => {
+      container.classList.remove("right-panel-active");
+    });
   </script>
+
 </body>
 </html>

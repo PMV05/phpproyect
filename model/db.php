@@ -40,7 +40,8 @@
         */
         public static function displayError($error_message) {
             global $app_path;
-            include 'errors/db_error.php';
+            // include 'errors/db_error.php';
+               include __DIR__ . '/../errors/db_error.php';
             exit();
         }
     }
