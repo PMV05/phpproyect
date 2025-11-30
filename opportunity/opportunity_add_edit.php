@@ -33,7 +33,7 @@
         <div id="opportunity-info-form">
             <!-- Titulo de la oportunidad -->
             <div>
-                <label for="title">Título:</label>
+                <label for="title">Título:<b class='input-required'>*</b></label>
                 <input type="text" id="title" name="title"
                     value="<?= $title; ?>" >
                 <?php if(isset($errorMessage['title'])) { ?>
@@ -45,7 +45,7 @@
 
             <!-- Patrocinador de la oportunidad -->
             <div>
-                <label for="sponsor">Patrocinador:</label>
+                <label for="sponsor">Patrocinador:<b class='input-required'>*</b></label>
                 <input type="text" id="sponsor" name="sponsor"
                     value="<?= $sponsor; ?>" >
                 <?php if(isset($errorMessage['sponsor'])) { ?>
@@ -57,7 +57,7 @@
 
             <!-- Tipo de la oportunidad -->
             <div>
-                <label for="type">Tipo:</label>
+                <label for="type">Tipo:<b class='input-required'>*</b></label>
                 
                 <select id="opportunity-type" name="type" >
                     <option value="0"></option>
@@ -120,7 +120,7 @@
         </div>
         
         <!-- Descripcion de la oportunidad -->
-        <label for="description">Descripción:</label>
+        <label for="description">Descripción:<b class='input-required'>*</b></label>
         <textarea id="description" name="description" rows="8" ><?= $description; ?></textarea>
         <?php if(isset($errorMessage['description'])) { ?>
             <span class="error-message">

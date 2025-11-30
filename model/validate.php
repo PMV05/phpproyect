@@ -10,7 +10,7 @@
                       false si el username no es valido
         */
         function userID(string $userID){
-            return preg_match('[[:alnum:]]+[\.][[:alnum:]]+', $userID);
+            return preg_match('/^[[:alnum:]]+\.[[:alnum:]]+$/', $userID);
         } 
 
         /*
@@ -20,12 +20,12 @@
             Parametros: password del usuario
             Devuelve: true si cumple con los requisitos, y 
                       false si la contraseña no es valida
-        // */
-        // function password(string $password){
-        //     $pattern = '/^(?=.*[[::]])$/';
+        */
+        function password(string $password){
+            $pattern = '/^ (?=.*[[:digit:]]) (?=.*[[:upper:]]) (?=.*[[:lower:]]) (?=.*[[:punct:]]) [[:graph:]] {8,}$/';
 
-        //     return preg_match('[[:alnum:]]+[\.][[:alnum:]]+', $userID);
-        // } 
+            return preg_match('[[:alnum:]]+[\.][[:alnum:]]+', $userID);
+        } 
 
         /*
             url()

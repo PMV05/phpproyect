@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <a class="button" href="./profile_edit.php">Editar</a>
+        <a class="button" href=".?action=edit_profile_form">Editar</a>
     </div>
 
     <!-- Oportunidades añadidas por el usuario -->
