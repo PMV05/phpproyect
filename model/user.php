@@ -14,7 +14,7 @@
             string $email = "",
             string $password = "",
             int $userRole = 0,
-            string $roleName
+            string $roleName = ""
         ){
             $this->userID = $userID;
             $this->email = $email;

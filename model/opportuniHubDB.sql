@@ -46,7 +46,9 @@ CREATE TABLE opportunities (
   CONSTRAINT fk_opp_type
     FOREIGN KEY (oppType) REFERENCES opportunities_type(typeID),
   CONSTRAINT fk_opp_user
-    FOREIGN KEY (ownerUserID) REFERENCES users(userID) ON DELETE CASCADE
+    FOREIGN KEY (ownerUserID) REFERENCES users(userID) 
+      ON DELETE CASCADE 
+      ON UPDATE CASCADE
 );
 
 -- Tabla para la lista de distribucion de email

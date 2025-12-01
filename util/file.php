@@ -1,5 +1,5 @@
 <?php 
-    include("../util/main.php");
+    include("main.php");
 
     $file_dir_path = $doc_root . $app_path . 'files';
     $file_dir_path = str_replace('/', DIRECTORY_SEPARATOR, $file_dir_path);
