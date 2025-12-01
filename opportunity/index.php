@@ -1,7 +1,7 @@
 <?php 
     require_once("../util/main.php");
     include("../util/text.php");
-    include("../model/file.php");
+    include("../util/file.php");
     require_once("../model/opportunity.php");
     require_once("../model/opportunity_db.php");
 

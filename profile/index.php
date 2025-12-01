@@ -6,7 +6,7 @@
     require_once("../model/user_db.php");
     require_once("../model/distributionListdb.php");
     require_once("../model/validate.php");
-    require_once("../model/file.php");
+    require_once("../util/file.php");
 
     $action = filter_input(INPUT_POST, 'action');
 
@@ -24,6 +24,7 @@
     switch($action) {
         // Accion por default para ver el perfil del usuario
         case 'view_profile':
+            // Busca la informacion del usuario
             $user = UserDB::getUserById($username);
 
             // Busca todas las oportunidades relacionadas al usuario
@@ -31,6 +32,126 @@
 
             include("profile_view.php");
             break;
+
+        // Accion para mostrar el formulario
+        case 'edit_profile_form':
+            // Busca la informacion del usuario
+            $user = UserDB::getUserById($username);
+
+            include("profile_edit.php");
+            break;
+
+        // Accion para editar el perfil del usuario
+        case "edit_profile":
+            // Almacena los mensajes de errores
+            $errorMessage = [];
+            // Almacena las contraseñas que se colocaron 
+            $passwords = [];
+
+            $users = UserDB::getAllUsers();
+            $user = UserDB::getUserById($username);
+
+            $userID = filter_input(INPUT_POST, 'username'); 
+            $email = filter_input(INPUT_POST, 'email'); 
+            $password = filter_input(INPUT_POST, 'password'); 
+            $newPassword = filter_input(INPUT_POST, 'new-password');
+            $confirmPassword = filter_input(INPUT_POST, 'confirm-password');
+           
+            // Se validan los campos
+
+            // Valida el nombre del usuario
+            if(!validate\userID($userID) || !validate\requiredField($userID)){
+                $errorMessage['userID'] = "Nombre de usuario inválido";
+                $user->setUserID($userID);
+            }
+            else
+                // Si el id no es lo mismo y no existe en la base de datos se cambia
+                if($user->getUserID() != $userID)
+                    if(!UserDB::findUserID($userID))
+                        $user->setUserID($userID);
+                    
+                    else
+                        $errorMessage['userID'] = "Nombre de usuario no disponible";
+
+            // Valida el email    
+            if(!validate\email($email) || !validate\requiredField($email))
+                $errorMessage['email'] = "Email inválido";
+            else
+                // Si el email no es lo mismo y no existe en la base de datos se cambia
+                if($user->getEmail() != $email)
+                    if(!UserDB::findEmail($email))
+                        $user->setEmail($email);
+                    else
+                        $errorMessage['email'] = "Email no disponible";
+
+            # Valida que esten todos los campos de la contraseñas
+            if(validate\requiredField($password) &&
+                validate\requiredField($newPassword) &&
+                validate\requiredField($confirmPassword)){
+
+                // Valida que las contraseñas tengan el formato correct
+                if(validate\password($password) &&
+                    validate\password($newPassword) &&
+                    validate\password($confirmPassword)){ 
+
+                    // Verifica que la contraseña actual sea la correcta
+                    if(password_verify($password, $user->getPassword())){
+                        #Verifica que la contraseña nueva este escrita correctamente
+                        if($newPassword === $confirmPassword)
+                            $user->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
+                        
+                        else
+                            $errorMessage['confirmPassword'] = "Las contraseñas no coinciden";
+                    }
+                    else 
+                        $errorMessage['password'] = "Contraseña incorrecta";
+                }
+                else {
+                    // Contraseña actual
+                    if(!validate\password($password))
+                        $errorMessage['password'] = "La contraseña no es segura";
+                    
+                    // Contraseña nueva
+                    if(!validate\password($newPassword))
+                        $errorMessage['newPassword'] = "La contraseña no es segura";
+
+                    // Confirmacion de la contraseña nueva
+                    if(!validate\password($confirmPassword))
+                        $errorMessage['confirmPassword'] = "La contraseña no es segura";
+                }
+            }
+            // Valida que haya por lo menos un campo lleno
+            else if(validate\requiredField($password) ||
+                    validate\requiredField($newPassword) ||
+                    validate\requiredField($confirmPassword)) {
+
+                // Contraseña actual
+                if(!validate\requiredField($password))
+                    $errorMessage['password'] = "Debe colocar la contraseña";
+
+                // Contraseña nueva
+                if(!validate\requiredField($newPassword))
+                    $errorMessage['newPassword'] = "Debe colocar la nueva contraseña";
+
+                // Confirmacion de la contraseña nueva
+                if(!validate\requiredField($confirmPassword))
+                    $errorMessage['confirmPassword'] = "Debe confirmar la contraseña";
+            }
+
+            $passwords['password'] = $password;
+            $passwords['newPassword'] = $newPassword;
+            $passwords['confirmPassword'] = $confirmPassword;
+
+            // Si hay un error se le enviara volver a mostrar el formulario
+            if(count($errorMessage) > 0){
+                include("profile_edit.php");
+                break;
+            }
+            
+            UserDB::updateUser($user, $username);
+
+            header("Location: .");
+            exit();
 
         // Muestra el formulario para añadir o editar una oportunidad
         case 'add_edit_opportunity_form':
