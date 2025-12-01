@@ -5,10 +5,10 @@ require_once "../../model/db.php";
 require_once "../../model/opportunity_db.php";
 
 $db = Database::getDB();
-$stmt = $db->prepare("SELECT typeID, typeName FROM opportunities_type");
-$stmt->execute();
-$opportunities_types = $stmt->fetchAll();
-$stmt->closeCursor();
+$statement = $db->prepare("SELECT typeID, typeName FROM opportunities_type");
+$statement->execute();
+$opportunities_types = $statement->fetchAll();
+$statement->closeCursor();
 
 $ownerUserID = "admin";
 
