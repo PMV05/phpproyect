@@ -1,14 +1,42 @@
 <?php
+
+session_start();
+
 include("../../util/main.php");
-include("../../model/opportunity.php");
-include("../../model/opportunity_db.php");
 
-$opportunities = OpportunityDB::getAllOpportunities();
+require_once "../../model/opportunity.php";
+require_once "../../model/opportunity_db.php";
 
-if ($opportunities === null) {
-    $opportunities = [];
-} else if (!is_array($opportunities)) {
-    $opportunities = [$opportunities];
+$action = filter_input(INPUT_POST, 'action');
+if ($action === null || $action === '') {
+    $action = filter_input(INPUT_GET, 'action');
+}
+if ($action === null || $action === '') {
+    $action = 'list'; 
 }
 
-include("index_view.php");  // <-- Nueva vista
+switch ($action) {
+
+    case 'delete':
+
+        $opportunityID = filter_input(INPUT_POST, 'opportunityID', FILTER_VALIDATE_INT);
+
+        if ($opportunityID) {
+            OpportunityDB::deleteOpportunity($opportunityID);
+        }
+
+ 
+        header("Location: index.php");
+        exit;
+
+    case 'add':
+    case 'edit':
+        include("opportunity_add_edit.php");
+        break;
+
+    case 'list':
+    default:
+        $opportunities = OpportunityDB::getAllOpportunities();
+        include("index_view.php");
+        break;
+}

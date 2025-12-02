@@ -7,7 +7,7 @@
         private string $description;
         private string $sponsor;
         private string $url;
-        private string $attachment;
+        private ?string $attachment;
         private string $datePosted;
         private string $deadline;
         private int $type;
@@ -22,7 +22,7 @@
             string $description = "",
             string $sponsor = "",
             string $url = "",
-            string $attachment = "",
+            ?string $attachment = null,
             string $datePosted = "",
             string $deadline = "",
             int $type = 0,

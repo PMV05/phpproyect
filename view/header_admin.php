@@ -16,7 +16,7 @@
         <!-- Menu para navegar entre las paginas -->
         <nav>
             <ul>
-                <li><a href="<?php echo $app_path ?>admin/">Inicio</a></li>
+                <li><a href="<?php echo $app_path ?>">Inicio</a></li>
                 <li><a href="<?php echo $app_path ?>opportunity">Oportunidades</a></li>
                 <li><a href="<?php echo $app_path ?>account">Cuentas</a></li>
                 <li><a href="<?php echo $app_path ?>profile">Perfil</a></li>
