@@ -1,6 +1,6 @@
 :root {
     --header: #000; /* para el header */
-    --background: #201f1f; /* para el background */
+    --background: #161616; /* para el background */
     --card: #0B0B0B; /* para los cards con la informacion*/
     --details: #78D3CF; /* para los detalles de los botones y demas */
     --hover: #06635F; /* para el hover de los botones */
@@ -332,6 +332,10 @@ textarea#description{
     background-color: transparent;
     border: none;
 }
+.input-required {
+    color: var(--error);
+    margin-left: 20px;
+}
 
 /* Mensajes de error */
 .error-message {
@@ -360,7 +364,114 @@ textarea#description{
     color: #c4c2c2;
 }
 
-
+/* Suscribirme */
+/* Seccion */
+.section {
+    text-align: center;
+    padding: 90px 0;
+    background: var(--background);
+    color: var(--font);
+    font-family: 'Montserrat', sans-serif;
+}
+.title {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+/* Texto */
+.text {
+    font-size: 24px;
+    margin-bottom: 70px;
+}
+/* Caja del formulario */
+.form-box {
+    margin: 0 auto;
+    padding: 50px;
+    width: 65%;
+    background: var(--card);
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+.form-box label {
+    font-size: 22px;
+}
+.form-box input {
+    width: 80%;
+    max-width: 620px;
+    padding: 14px 20px;
+    border-radius: 30px;
+    border: none;
+    background: #dedede;
+    font-size: 18px;
+    outline: none;
+}
+.btn-main {
+    padding: 10px 26px;
+    border-radius: 20px;
+    border: 2px solid #79dbd3;
+    background: transparent;
+    color: var(--font);
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    width: 180px;
+    text-align: center;
+}
+.btn-main:hover {
+    background-color: var(--details);
+    color: var(--header);
+    border-color: var(--details);
+    transform: scale(1.05);
+}
+/* Wrapper */
+.dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+.btn-cancel {
+    position: absolute;
+    top: 52px;
+    width: 180px;
+    display: none;
+    padding: 10px 26px;
+    border-radius: 20px;
+    border: 2px solid var(--details);
+    background: transparent;
+    color: var(--font);
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    text-decoration: none;
+    /* white-space: nowrap; */
+    z-index: 10;
+    font-size: clamp(10px, 2vw, 20px);
+    overflow: hidden;
+}
+.btn-cancel:hover {
+    background-color: var(--details);
+    color: var(--header);
+    border-color: var(--details);
+    transform: scale(1.05);
+}
+.dropdown-wrapper:hover .btn-cancel {
+    display: block;
+    animation: fadeIn 0.20s ease-out;
+}
+.sub-form {
+    display: flex;
+    flex-direction: column;
+}
+.sub-form span {
+    padding: 5px 0;
+    color: var(--error);
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
 
 
@@ -398,3 +509,5 @@ textarea#description{
 .menu-card img {
     width: 180px;
 }
+
+
