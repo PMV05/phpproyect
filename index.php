@@ -2,7 +2,7 @@
     Autor:  
     - Jonathan J Vega Rivera 
     - Pedro M. Vazquez Gonzalez 
-    - Pedro I. Perez Nieves
+    - Joseph I. Perez Nieves
 
     Pagina inicial de la aplicacion web
 -->

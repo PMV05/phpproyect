@@ -46,7 +46,7 @@
       </form>
     </div>
 
-    <!-- Formulario de Iniciar Sesión -->
+    <!-- Formulario de Iniciar Sesion -->
     <div class="form-container sign-in-container">
       <form action="login_db.php" method="POST">
         <h1>Iniciar Sesión</h1>
@@ -73,7 +73,7 @@
       </form>
     </div>
 
-    <!-- Paneles -->
+
     <div class="overlay-container">
       <div class="overlay">
         <div class="overlay-panel overlay-left">
