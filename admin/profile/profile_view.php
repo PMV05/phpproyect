@@ -1,13 +1,4 @@
-<?php include("../../util/main.php") ?>
-<?php include("../../view/header_admin.php") ?>
-
-<?php 
-
-    $opportunities = [['id'=> "123", 'title' => "Software Engineering", 'date' => "11/3/2025"],
-                      ['id'=> "124", 'title' => "Web Developer", 'date' => "11/5/2025"],
-                      ['id'=> "126", 'title' => "App Developer", 'date' => "11/15/2025"]];
-
-?>
+<?php include("../../view/header_admin.php"); ?>
 
 <main>
     <h1>Perfil</h1>
@@ -17,15 +8,15 @@
         <div class="profile-info">
             <div>
                 <label for="username">Nombre de usuario:</label>
-                <input type="text" id="username" disabled>
+                <input type="text" id="username" value=<?= $user->getUserID(); ?> disabled>
             </div>
             <div>
                 <label for="email">Correo electrónico:</label>
-                <input type="text" id="email" disabled>
+                <input type="text" id="email" value=<?= $user->getEmail(); ?> disabled>
             </div>
         </div>
 
-        <a class="button" href="./profile_edit.php">Editar</a>
+        <a class="button" href=".?action=edit_profile_form">Editar</a>
     </div>
 
     <!-- Oportunidades añadidas por el usuario -->
@@ -33,24 +24,32 @@
         <h2>Mis oportunidades:</h2>
 
         <div id="profile-opportunities-info">
-            <a href="../opportunity/opportunity_add_edit.php"><img src="<?php echo $app_path . "images/add.png"?>"></a>
-            <!-- Iterara cada oportunidad relacionada a la cuenta del usuario -->
-            <?php foreach($opportunities as $opportunity) : ?>
-            <div class="profile-opportunity-card">
-                <div>
-                    <h3><?php echo $opportunity['title'] ?></h3>
-                    <span><?php echo $opportunity['date'] ?></span>
+            <a href=".?action=add_edit_opportunity_form"><img src="<?php echo $app_path . "images/add.png"?>" class="icon_image"></a>
+            <?php if(!empty($opportunities)) {?>
+                <!-- Mostrará cada oportunidad relacionada a la cuenta del usuario -->
+                <?php foreach($opportunities as $opportunity) : ?>
+                <div class="profile-opportunity-card">
+                    <div>
+                        <h3><?php echo $opportunity->getTitle(); ?></h3>
+                        <span><?php echo $opportunity->getDatePosted() ?></span>
+                    </div>
+                    <div class="opportunity-options">
+                        <!-- Boton para editar la oportunidad -->
+                        <a href=".?action=add_edit_opportunity_form&opportunityId=<?= $opportunity->getId();?>">
+                            <img src="<?php echo $app_path . "images/edit.png"?>"  class="icon_image">
+                        </a>
+                        <!-- Boton para eliminar la oportunidad -->
+                        <a href=".?action=delete_opportunity&opportunityId=<?= $opportunity->getId();?>">
+                            <img src="<?php echo $app_path . "images/trash.png"?>"  class="icon_image">
+                        </a>
+                    </div>
                 </div>
-                <div class="opportunity-options">
-                    <a href="/"><img src="<?php echo $app_path . "images/edit.png"?>"></a>
-                    <a href="/"><img src="<?php echo $app_path . "images/trash.png"?>"></a>
-                </div>
-            </div>
-            <?php endforeach ?>
+                <?php endforeach ?>
+            <?php } else {?>
+                <h2>No has publicado ninguna oportunidad</h2>
+            <?php } ?>
         </div>
     </div>
-
 </main>
-
 
 <?php include("../../view/footer.php") ?>

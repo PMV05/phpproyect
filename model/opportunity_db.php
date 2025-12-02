@@ -13,7 +13,8 @@
         */
         public static function getOpportunitiesByUserId($userId) {
             $db = Database::getDB();
-            $query = 'SELECT *
+            $query = 'SELECT oppID, title, description, sponsor, url, attachmentPath, 
+                    DATE(datePosted) AS dateP, deadline, typeID, ownerUserID, typeName
                       FROM opportunities o
                         INNER JOIN opportunities_type t
                             ON o.oppType = t.typeID
@@ -38,7 +39,7 @@
                                                             $row['sponsor'], 
                                                             $row['url'], 
                                                             $row['attachmentPath'], 
-                                                            $row['datePosted'], 
+                                                            $row['dateP'], 
                                                             $row['deadline'], 
                                                             $row['typeID'], 
                                                             $row['ownerUserID'], 
@@ -157,7 +158,9 @@
         */
         public static function getOpportunityById($opportunityId){
             $db = Database::getDB();
-            $query = 'SELECT *
+            $query = 'SELECT oppID, title, description, sponsor, url, attachmentPath, 
+            DATE(datePosted) AS dateP, deadline,
+                            typeID, ownerUserID, typeName
                       FROM opportunities o
                         INNER JOIN opportunities_type t 
                             ON o.oppType = t.typeID
@@ -179,7 +182,7 @@
                             $row['sponsor'], 
                             $row['url'],
                             $row['attachmentPath'], 
-                            $row['datePosted'], 
+                            $row['dateP'], 
                             $row['deadline'], 
                             $row['typeID'], 
                             $row['ownerUserID'], 
@@ -202,7 +205,9 @@
         */
         public static function getAllOpportunities() {
             $db = Database::getDB();
-            $query = 'SELECT *
+            $query = 'SELECT oppID, title, description, sponsor, url, attachmentPath, 
+                    DATE(datePosted) AS dateP, deadline,
+                            typeID, ownerUserID, typeName
                       FROM opportunities o
                       INNER JOIN opportunities_type t
                         ON o.oppType = t.typeID';
@@ -221,7 +226,7 @@
                     foreach($rows as $row) {
                         $attachment = $row['attachmentPath'] ?? '';
                         $url        = $row['url'] ?? '';
-                        $datePosted = $row['datePosted'] ?? '';
+                        $datePosted = $row['dateP'] ?? '';
                         $deadline   = $row['deadline'] ?? '';
 
                         $opportunities[] = new Opportunity(

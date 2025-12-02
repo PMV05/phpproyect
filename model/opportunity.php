@@ -9,7 +9,7 @@
         private string $url;
         private ?string $attachment;
         private string $datePosted;
-        private string $deadline;
+        private ?string $deadline;
         private int $type;
         private string $author;
         private string $typeName;
@@ -24,7 +24,7 @@
             string $url = "",
             ?string $attachment = null,
             string $datePosted = "",
-            string $deadline = "",
+            ?string $deadline = "",
             int $type = 0,
             string $author = "",
             string $typeName = ""
@@ -157,7 +157,10 @@
         # Asigna valor al atributo de deadline
         # Recibe: el dia que termina la oferta de la oportunidad 
         public function setDeadline(string $deadline){
-            $this->deadline = $deadline;
+            if(empty($deadline))
+                $this->deadline = null;
+            else
+                $this->deadline = $deadline;
         }
         # getDeadline()
         #

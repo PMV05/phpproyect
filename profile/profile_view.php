@@ -1,12 +1,4 @@
-<<<<<<< Updated upstream
 <?php include("../view/header.php"); ?>
-=======
-<?php 
-    include("../view/header.php");
-
-    $account = ['username' => "Joseph ", 'email' => 'jianperez.n@gmail.com', 'password' => 'pass123', 'role' => 1];
-?>
->>>>>>> Stashed changes
 
 <main>
     <h1>Perfil</h1>
@@ -32,7 +24,7 @@
         <h2>Mis oportunidades:</h2>
 
         <div id="profile-opportunities-info">
-            <a href=".?action=add_edit_opportunity_form"><img src="<?php echo $app_path . "images/add.png"?>"></a>
+            <a href=".?action=add_edit_opportunity_form"><img src="<?php echo $app_path . "images/add.png"?>" class="icon_image"></a>
             <?php if(!empty($opportunities)) {?>
                 <!-- Mostrará cada oportunidad relacionada a la cuenta del usuario -->
                 <?php foreach($opportunities as $opportunity) : ?>
@@ -44,11 +36,11 @@
                     <div class="opportunity-options">
                         <!-- Boton para editar la oportunidad -->
                         <a href=".?action=add_edit_opportunity_form&opportunityId=<?= $opportunity->getId();?>">
-                            <img src="<?php echo $app_path . "images/edit.png"?>">
+                            <img src="<?php echo $app_path . "images/edit.png"?>" class="icon_image">
                         </a>
                         <!-- Boton para eliminar la oportunidad -->
                         <a href=".?action=delete_opportunity&opportunityId=<?= $opportunity->getId();?>">
-                            <img src="<?php echo $app_path . "images/trash.png"?>">
+                            <img src="<?php echo $app_path . "images/trash.png"?>" class="icon_image">
                         </a>
                     </div>
                 </div>

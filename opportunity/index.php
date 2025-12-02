@@ -7,7 +7,7 @@
 
     $action = filter_input(INPUT_POST, 'action');
 
-    // Si no hay una accion entrada, mostrara el perfil por deafult
+    // Se muestran las oportunidades
     if (!isset($action)) {
         $action = filter_input(INPUT_GET, 'action');
 

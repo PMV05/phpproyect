@@ -11,7 +11,7 @@
     $action = filter_input(INPUT_POST, 'action');
 
     // Esto es solo un ejemplo en lo que se utiliza el UserDB
-    $username = 'Joseph';
+    $username = 'jonathan.vega';
 
     // Si no hay una accion entrada, mostrara el perfil por default
     if (!isset($action)) {
