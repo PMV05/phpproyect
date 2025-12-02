@@ -8,7 +8,7 @@
     <h1 class="titulo">Cuentas</h1>
 
     <div class="contenido">
-        <div style="text-align:right; margin-bottom: 20px;">
+        <div style="text-align:center; margin-bottom: 20px;">
            <a href="index.php?action=add" class="button">Añadir cuenta</a>
         </div>
 
@@ -25,7 +25,7 @@
 
                             <p>Email:<br> <?php echo htmlspecialchars($user->getEmail()); ?></p>
 
-                            <p>Rol:<br> <?php echo htmlspecialchars(getRoleLabel($user)); ?></p>
+                            <p>Rol:<br> <?php echo htmlspecialchars($user->getRoleName()); ?></p>
 
                             <div class="card-actions">
 
@@ -33,8 +33,7 @@
 
                                 <form action="index.php" method="post" onsubmit="return confirm('¿Seguro que deseas eliminar esta cuenta?');">
                                     <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="userID"
-                                           value="<?php echo $user->getUserID(); ?>">
+                                    <input type="hidden" name="userID" value="<?php echo $user->getUserID(); ?>">
                                     <button type="submit"
                                             class="button button-small button-danger">Eliminar</button>
                                 </form>

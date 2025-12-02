@@ -123,7 +123,6 @@ main {
     color: #000;
 }
 
-
 .op-main {
     padding: 40px 80px;
 }
@@ -188,7 +187,6 @@ main {
     margin-bottom: 6px;
 }
 
-/* Botones de filtros */
 .guardar {
     padding: 8px 18px;
     border-radius: 999px;
@@ -246,8 +244,6 @@ main {
     margin-bottom: 15px;
 }
 
-/* ---- ACCIONES ---- */
-
 .op-card-actions {
     display: flex;
     gap: 10px;
@@ -273,143 +269,4 @@ main {
     text-align: center;
     font-size: 1.1rem;
     opacity: 0.7;
-}
-
-/* ==== AJUSTES PARA QUE EL ADMIN DE OPORTUNIDADES SE VEA COMO EL MOCKUP ==== */
-
-/* Que este main sea más ancho que los 900px por defecto */
-.op-main {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px 40px;
-}
-
-/* Filtros a la izquierda y lista a la derecha */
-.op-layout {
-    display: flex;
-    align-items: flex-start;
-    gap: 40px;
-    margin-top: 40px;
-}
-
-/* Columna izquierda fija */
-.filtros {
-    flex: 0 0 260px;
-}
-
-/* Columna derecha ocupa el resto */
-.op-list-section {
-    flex: 1;
-}
-
-/* Centrar mejor el buscador y hacerlo más ancho */
-.op-search-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.op-search-input {
-    width: 60%;
-    max-width: 500px;
-}
-
-/* Asegurar que las tarjetas usen todo el ancho disponible de la columna derecha */
-.op-card {
-    width: 100%;
-}
-/* ===== FORMULARIO DE AÑADIR / EDITAR OPORTUNIDAD (ADMIN) ===== */
-
-.op-edit-page {
-    max-width: 1100px;
-    margin: 40px auto 80px;
-    padding: 0 20px;
-}
-
-.op-edit-title {
-    text-align: center;
-    font-size: 2.4rem;
-    margin-bottom: 30px;
-}
-
-.op-edit-card {
-    background: var(--card);
-    border-radius: 32px;
-    padding: 40px 60px;
-}
-
-/* Formulario general */
-#add-edit-opportunity {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-/* Grid de inputs de arriba (2 columnas) */
-#opportunity-info-form {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 40px;
-}
-
-.field-group label {
-    display: block;
-    margin-bottom: 6px;
-}
-
-#add-edit-opportunity input[type="text"],
-#add-edit-opportunity input[type="date"],
-#add-edit-opportunity input[type="url"],
-#add-edit-opportunity input[type="file"],
-#add-edit-opportunity select,
-#add-edit-opportunity textarea {
-    width: 100%;
-    padding: 10px 14px;
-    border-radius: 999px;
-    border: none;
-    background: #dedede;
-    color: #000;
-    font-size: 0.95rem;
-}
-
-/* Textarea grande con bordes redondeados estilo mockup */
-.field-description textarea {
-    border-radius: 26px;
-    min-height: 200px;
-    resize: vertical;
-}
-
-/* Texto de ayuda bajo la descripción */
-.description-help {
-    font-size: 0.85rem;
-    margin-top: 10px;
-}
-
-/* Error global arriba del form */
-.form-error-global {
-    color: var(--error);
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-/* Botón de enviar centrado */
-.form-actions {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.submit-button {
-    padding: 8px 40px;
-    border-radius: 999px;
-    border: 2px solid var(--details);
-    background: transparent;
-    color: var(--font);
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.submit-button:hover {
-    background: var(--details);
-    color: #000;
 }
