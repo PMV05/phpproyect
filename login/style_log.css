@@ -8,6 +8,7 @@
     --details: #78D3CF;
     --hover: #06635F;
     --font: #fff;
+    --error: #c10707; 
 }
 
 * {
@@ -50,6 +51,7 @@ body {
   width: 50%;
   opacity: 0;
   z-index: 1;
+  transition: opacity 0.6s ease-in-out;
 }
 
 .sign-in-container {
@@ -85,6 +87,30 @@ input {
 
 input:focus {
   border-color: var(--details);
+}
+
+/* Iconos */
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-container i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.input-container input {
+  padding-left: 40px;
+}
+
+.input-container:focus-within i {
+  color: var(--details);
 }
 
 /* Botones */
@@ -135,7 +161,7 @@ button.ghost:hover {
 }
 
 .overlay {
-  background: linear-gradient(to right, var(--details), var(--hover));
+  background: linear-gradient(135deg, var(--details), var(--hover));
   background-repeat: no-repeat;
   background-size: cover;
   color: var(--font);
@@ -170,6 +196,7 @@ button.ghost:hover {
   transform: translateX(0);
 }
 
+/* Animaciones */
 .container.right-panel-active .sign-in-container {
   transform: translateX(100%);
 }
@@ -221,27 +248,6 @@ button.ghost:hover {
   color: var(--font);
 }
 
-/* Iconos*/
-.input-container {
-  position: relative;
-  width: 100%;
-}
-
-.input-container i {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #888;
-  font-size: 16px;
-  transition: color 0.3s;
-}
-
-.input-container input {
-  padding-left: 40px;
-}
-
-.input-container input:focus + i,
-.input-container:focus-within i {
-  color: var(--details);
+.error-message {
+  color: var(--error);
 }

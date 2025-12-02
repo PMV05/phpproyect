@@ -8,6 +8,7 @@
     --details: #78D3CF;
     --hover: #06635F;
     --font: #fff;
+    --error: #c10707; 
 }
 
 * {
@@ -245,4 +246,8 @@ button.ghost:hover {
 .social:hover {
   background: var(--hover);
   color: var(--font);
+}
+
+.error-message {
+  color: var(--error);
 }

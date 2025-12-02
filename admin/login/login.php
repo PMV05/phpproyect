@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,7 +14,8 @@
 
     <!-- Formulario de Registrarse -->
     <div class="form-container sign-up-container">
-      <form action="register_db.php" method="POST">
+      <form action="." method="POST">
+        <input type="hidden" name="action" value="register">
         <h1>Crear una Cuenta</h1>
 
         <div class="social-container">
@@ -29,17 +28,20 @@
 
         <div class="input-container">
           <i class="fa-solid fa-user"></i>
-          <input type="text" name="fullname" placeholder="Nombre Completo" required />
+          <input type="text" name="username" placeholder="Nombre Completo" />
+          <span class='error-message'><?php echo (isset($errorMessage['username'])) ? $errorMessage['username'] : "" ?></span>
         </div>
 
         <div class="input-container">
           <i class="fa-solid fa-envelope"></i>
-          <input type="email" name="email" placeholder="Correo Electrónico" required />
+          <input type="email" name="email" placeholder="Correo Electrónico" />
+          <span class='error-message'><?php echo (isset($errorMessage['email'])) ? $errorMessage['email'] : "" ?></span>
         </div>
 
         <div class="input-container">
           <i class="fa-solid fa-lock"></i>
-          <input type="password" name="password" placeholder="Contraseña" required />
+          <input type="password" name="password" placeholder="Contraseña" />
+          <span class='error-message'><?php echo (isset($errorMessage['password'])) ? $errorMessage['password'] : "" ?></span>
         </div>
 
         <button type="submit">Registrarse</button>
@@ -48,7 +50,9 @@
 
     <!-- Formulario de Iniciar Sesion -->
     <div class="form-container sign-in-container">
-      <form action="login_db.php" method="POST">
+
+      <form action="." method="POST">
+        <input type="hidden" name="action" value="login">
         <h1>Iniciar Sesión</h1>
 
         <div class="social-container">
@@ -61,12 +65,14 @@
 
         <div class="input-container">
           <i class="fa-solid fa-envelope"></i>
-          <input type="email" name="email" placeholder="Correo Electrónico" required />
+          <input type="text" name="username" placeholder="Nombre de usuario" />
+          <span class='error-message'><?php echo (isset($errorMessage['usernameLog'])) ? $errorMessage['usernameLog'] : "" ?></span>
         </div>
 
         <div class="input-container">
           <i class="fa-solid fa-lock"></i>
-          <input type="password" name="password" placeholder="Contraseña" required />
+          <input type="password" name="password" placeholder="Contraseña" />
+          <span class='error-message'><?php echo (isset($errorMessage['password'])) ? $errorMessage['password'] : "" ?></span>
         </div>
 
         <button type="submit">Entrar</button>

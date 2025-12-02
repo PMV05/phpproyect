@@ -32,12 +32,18 @@ switch ($action) {
         $username = filter_input(INPUT_POST, 'username');
         $password = filter_input(INPUT_POST, 'password');
 
-        // Validaciones
-        if (!validate\requiredField($username))
-            $errorMessage['username'] = "Debe colocar su nombre de usuario";
+        // Validaciones nombre de usuario
+        if (!validate\requiredField($username) || !validate\userID($username))
+            $errorMessage['usernameLog'] = "Nombre de usuario inválido.";
+        
+        else
+            if(!UserDB::findUserID($username))
+                $errorMessage['usernameLog'] = "Nombre de usario no existe.";
 
-        if (!validate\requiredField($password))
-            $errorMessage['password'] = "Debe colocar su contraseña";
+        // Validaciones de la contraseña
+        if (!validate\requiredField($password) || !validate\password($password))
+            $errorMessage['password'] = "Contraseña inválida";
+
 
         // Si hay errores muestra el formulario
         if (count($errorMessage) > 0) {
@@ -48,12 +54,6 @@ switch ($action) {
         // Buscar usuario
         $user = UserDB::getUserById($username);
 
-        if ($user === null) {
-            $errorMessage['username'] = "Usuario no encontrado";
-            include("login.php");
-            break;
-        }
-
         // Verificar contrasena
         if (!password_verify($password, $user->getPassword())) {
             $errorMessage['password'] = "Contraseña incorrecta";
@@ -63,7 +63,56 @@ switch ($action) {
 
         // Login exitoso
         $_SESSION['user'] = $user->getUserID();
-        header("Location: ../dashboard/index.php");
+        header("Location: ../index.php");
+        exit();
+
+    case 'register':
+        
+        $errorMessage = [];
+
+        $username = filter_input(INPUT_POST, 'username');
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $password = filter_input(INPUT_POST, 'password');
+        $role = 2;
+
+        $user = new User();
+        $user->setUserRole($role);
+
+        // Validaciones nombre de usuario
+        if (!validate\requiredField($username) || !validate\userID($username))
+            $errorMessage['username'] = "Nombre de usuario inválido.";
+        
+        else
+            if(UserDB::findUserID($username))
+                $errorMessage['username'] = "Nombre de usuario no disponible.";
+            else
+                $user->setUserID($username);
+
+        // Validaciones del correo electronico
+        if (!validate\requiredField($email) || !validate\email($email))
+            $errorMessage['email'] = "Correo electrónico inválido.";
+        
+        else
+            if(UserDB::findEmail($email))
+                $errorMessage['email'] = "Correo electrónico no disponible.";
+            else
+                $user->setEmail($email);
+
+        // Validaciones de la contraseña
+        if (!validate\requiredField($password) || !validate\password($password))
+            $errorMessage['password'] = "Contraseña inválida";
+        else
+            $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+
+        // Si hay errores muestra el formulario
+        if (count($errorMessage) > 0) {
+            include("login.php");
+            break;
+        }
+
+        UserDB::addUser($user);
+
+        header("Location: .");
         exit();
 
     // Logout
