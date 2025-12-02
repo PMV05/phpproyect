@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $finalPassword = ($password === '') ? $oldUser->getPassword() : $hashed;
 
                 $user = new User($userID, $email, $finalPassword, $role, "");
-                UserDB::updateUser($user);
+                UserDB::updateUser($user, $userID);
             }
         } else {
             $user = new User($userID, $email, $hashed, $role, "");
@@ -55,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Load for edit view
 if ($mode === 'edit' && $userID) {
     $user = UserDB::getUserById($userID);
 }

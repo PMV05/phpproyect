@@ -1,4 +1,12 @@
+<<<<<<< Updated upstream
 <?php include("../view/header.php"); ?>
+=======
+<?php 
+    include("../view/header.php");
+
+    $account = ['username' => "Joseph ", 'email' => 'jianperez.n@gmail.com', 'password' => 'pass123', 'role' => 1];
+?>
+>>>>>>> Stashed changes
 
 <main>
     <h1>Perfil</h1>

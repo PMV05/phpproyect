@@ -9,7 +9,7 @@
 
     <div class="contenido">
         <div style="text-align:right; margin-bottom: 20px;">
-            <a href="account_add_edit.php?action=add" class="button">Añadir cuenta</a>
+           <a href="index.php?action=add" class="button">Añadir cuenta</a>
         </div>
 
         <section class="tarjetas">
@@ -29,11 +29,9 @@
 
                             <div class="card-actions">
 
-                                <a href="account_add_edit.php?action=edit&id=<?php echo $user->getUserID(); ?>"
-                                   class="button button-small">Editar</a>
+                               <a href="index.php?action=edit&id=<?php echo $user->getUserID(); ?>" class="button button-small">Editar</a>
 
-                                <form action="index.php" method="post"
-                                      onsubmit="return confirm('¿Seguro que deseas eliminar esta cuenta?');">
+                                <form action="index.php" method="post" onsubmit="return confirm('¿Seguro que deseas eliminar esta cuenta?');">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="userID"
                                            value="<?php echo $user->getUserID(); ?>">
