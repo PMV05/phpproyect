@@ -1,35 +1,40 @@
-<!-- 
-    Autor:  
-    - Jonathan J Vega Rivera 
-    - Pedro M. Vazquez Gonzalez 
-    - Pedro I. Perez Nieves
-
-    Pagina inicial del admin
--->
 
 <?php
+    /* Autor:  
+    - Jonathan J Vega Rivera 
+    - Pedro M. Vazquez Gonzalez 
+    - Joseph I. Perez Nieves
+
+    Pagina inicial de la aplicacion web
+    */
+
     include("../util/main.php");
-    include("../view/header_admin.php");
+
+    if($isAdminLog){
+        $action = filter_input(INPUT_GET, 'action');
+
+        if(!isset($action))
+            $action = "home";
+    }
+    else
+        $action = "login";
+
+    switch ($action){
+        // Muestra la pagina principal
+        case 'home':
+            include("home_admin.php");
+            break;
+
+        // Iniciar sesion
+        case 'login':
+            header("Location: ./login/");
+            exit();
+
+        // Cierra sesion 
+        case 'logout':
+            unset($_SESSION['user']);
+            unset($_SESSION['role']);
+            header("Location: ./login/");
+            exit();
+    }
 ?>
-<link rel="stylesheet" href="../style.css">
-<main>
-    <h1>Menu</h1>
-
-    <!-- Opciones que tiene el administrador para navegar -->
-    <div id="menu-options">
-        <a href="<?php echo $app_path . "admin/opportunity/"?>">
-            <div class="menu-card">
-                <h2>Oportunidades</h2>
-                <img src="../images/opportunity.png">
-            </div>
-        </a>
-        <a href="<?php echo $app_path . "admin/account/"?>" >
-            <div class="menu-card">
-                <h2>Cuentas</h2>
-                <img src="../images/user.png">
-            </div>
-        </a>
-    </div>
-</main>
-
-<?php include("../view/footer.php"); ?>

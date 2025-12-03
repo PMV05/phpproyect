@@ -87,6 +87,10 @@ hr {
     border: none;
     border-top: 2px solid var(--background);
 }
+#footer-nav a{
+    text-decoration: none;
+    margin: 0 5px;
+}
 
 /* Estilos para el para la pagina inicial */
 
@@ -192,14 +196,14 @@ h1 , h2{
     flex-wrap: wrap;
 }
 
-input, select{
+input, select, option{
     max-width: 300px;
     min-width: 300px;
     border-radius: 20px;
     border: none;
     padding: 5px 15px;
     background-color: var(--font);
-    color: var(--header)
+    color: var(--header);
 }
 
 label {

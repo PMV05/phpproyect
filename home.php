@@ -1,3 +1,8 @@
+<?php 
+    include('./util/main.php');
+    include("./view/header.php");
+    
+?>
 <!-- Pagina principal del visitante y del contribuyente -->
 
 <!-- Imagen de bienvenida -->
@@ -63,3 +68,5 @@
         </a>
     </div>
 </main>
+
+<?php include("./view/footer.php"); ?>

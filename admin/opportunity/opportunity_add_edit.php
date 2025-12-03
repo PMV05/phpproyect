@@ -1,5 +1,5 @@
 <?php
-    include("../../view/header_admin.php");
+    include("../../view/header.php");
 
     // Si hay un id de una oportunidad la accion que se tomara es editar
     if (isset($opportunityId)) {
@@ -29,7 +29,7 @@
     <form action="." method="post" id="add-edit-opportunity" enctype="multipart/form-data">
         <input type="hidden" name="action" value="<?= $action; ?>">
         <input type="hidden" name="opportunityId" value="<?= ($id == 0) ? "" : $id; ?>">
-        <input type="hidden" name="userId" value="<?= $username; ?>">
+        <input type="hidden" name="userId" value="<?= $admin_username; ?>">
         <div id="opportunity-info-form">
             <!-- Titulo de la oportunidad -->
             <div>

@@ -1,6 +1,6 @@
 <?php
     include("../../util/main.php");
-    include("../../view/header_admin.php");
+    include("../../view/header.php");
 
 
     $id = htmlspecialchars($user->getUserID());

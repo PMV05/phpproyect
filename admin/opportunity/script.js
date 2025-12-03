@@ -3,53 +3,6 @@ const getElement = selector => document.querySelector(selector);
     document.addEventListener("DOMContentLoaded", () => {
         const cards = document.querySelectorAll(".card");
 
-        // Evento que abrira un popup al seleccionar un card de una oportunidad
-        const overlay = getElement("#overlay");
-        const modal = getElement("#cardExpandida");
-
-        const cerrar = () => {
-            modal.style.display = "none";
-            overlay.style.display = "none";
-        }
-
-        // Colocar la informacion de la oportunidad escogidad en el popup
-        cards.forEach(card => {
-            card.addEventListener("click", () => {
-                // Se obtienen los datos del card
-                const title = card.dataset.title;
-                const typeName = card.dataset.type_name;
-                const sponsor = card.dataset.sponsor;
-                const datePostedFormat = card.dataset.date_posted_format;
-                const deadline = card.dataset.deadline;
-                const author = card.dataset.author;
-                const url = card.dataset.url;
-                const attachment = card.dataset.attachment;
-                const fileName = card.dataset.file_name;
-                const description = card.dataset.description;
-
-                // Se colocan los datos en el popup
-                getElement("#opp-title").textContent = title;
-                getElement("#opp-type").textContent = typeName;
-                getElement("#opp-sponsor").textContent = sponsor;
-                getElement("#opp-date-posted-format").textContent = datePostedFormat;
-                getElement("#opp-deadline").textContent = deadline;
-                getElement("#opp-author").textContent = author;
-                getElement("#opp-url").textContent = url;
-                getElement("#opp-url").href = url;
-                getElement("#opp-attachment").textContent = fileName;
-                getElement("#opp-attachment").href = attachment;
-                getElement("#opp-description").innerHTML = description;
-
-                // Muestra el popup
-                modal.style.display = "block";
-                overlay.style.display = "block";
-            });
-        });
-
-        // Cierra el popup
-        getElement("#cerrarCard").addEventListener("click", cerrar);
-        overlay.addEventListener("click", cerrar);
-
         // Funcion para verificar si hay un filtro activo, y 
         // verificar si tiene el mismo valor
         const selectFilterCards = (card) => {

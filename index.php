@@ -1,20 +1,43 @@
-<!-- 
-    Autor:  
+<?php
+    /* Autor:  
     - Jonathan J Vega Rivera 
     - Pedro M. Vazquez Gonzalez 
     - Joseph I. Perez Nieves
 
     Pagina inicial de la aplicacion web
--->
-<?php
-    require_once('util/main.php');
+    */
+    include("./util/main.php");
 
-    // Muestra el header de la pagina
-    include("view/header.php");
+    if($isUserLog)
+    {$action = filter_input(INPUT_POST, 'action');
 
-    // Muestra la pagina principal
-    include("home.php");
+    if(!isset($action)){
+        $action = filter_input(INPUT_GET, 'action');
+        if(!isset($action))
+            $action = "home";}
+        else{
+            echo "No se inicio sesion";
+        }
+    }else {
+        $action = "home";
+    }
 
-    // Muestra el footer de la pagina
-    include("view/footer.php");
+    switch ($action){
+        // Muestra la pagina principal
+        case 'home':
+            include("home.php");
+            break;
+
+        // Iniciar sesion
+        case 'login':
+            header("Location: ./login/");
+            exit();
+
+        // Cierra sesion 
+        case 'logout':
+            unset($_SESSION['user']);
+            unset($_SESSION['role']);
+            header("Location: ./login/");
+            exit();
+    }
 ?>

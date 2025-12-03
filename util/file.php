@@ -1,9 +1,10 @@
 <?php 
     include("main.php");
 
-    $file_dir_path = $doc_root . $app_path . 'files';
-    $file_dir_path = str_replace('/', DIRECTORY_SEPARATOR, $file_dir_path);
-    $file_dir_path = str_replace('\\', DIRECTORY_SEPARATOR, $file_dir_path);
+    if(strpos(getcwd(), admin) == True)
+        $file_dir_path = realpath(getcwd() . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "files");
+    else
+        $file_dir_path = realpath(getcwd() . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR. "files");
 
     class File {
         const MAX_SIZE = 5 * 1024 * 1024;
@@ -55,11 +56,9 @@
                       string vacio si el archivo no existe
         */
         public static function getFile($fileName) {
-            global $app_path;
+            global $file_dir_path;
 
-            $app_path = str_replace('/', DIRECTORY_SEPARATOR, $app_path);
-            $app_path = str_replace('\\', DIRECTORY_SEPARATOR, $app_path);
-            return $app_path . "files". DIRECTORY_SEPARATOR . $fileName;
+            return $file_dir_path . DIRECTORY_SEPARATOR . $fileName;
         }
 
         /*

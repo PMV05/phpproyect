@@ -37,7 +37,7 @@ const getElement = selector => document.querySelector(selector);
                 getElement("#opp-url").textContent = url;
                 getElement("#opp-url").href = url;
                 getElement("#opp-attachment").textContent = fileName;
-                getElement("#opp-attachment").href = attachment;
+                getElement("#opp-attachment").href = "https://ccom.upra.edu/~vegrivjo/ccom4019/proyect/files/" + fileName;
                 getElement("#opp-description").innerHTML = description;
 
                 // Muestra el popup

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +16,25 @@
         <!-- Menu para navegar entre las paginas -->
         <nav>
             <ul>
-                <li><a href="<?php echo $app_path; ?>">Inicio</a></li>
-                <li><a href="<?php echo $app_path; ?>opportunity/">Oportunidades</a></li>
-                <li><a href="<?php echo $app_path; ?>suscribe/">Suscribirme</a></li>
-                <li><a href="<?php echo $app_path; ?>profile/">Perfil</a></li>
+                <?php if($isAdminLog) { ?>
+                    <!-- Menú de administrador -->
+                    <li><a href="<?php echo $app_path ?>admin/">Inicio</a></li>
+                    <li><a href="<?php echo $app_path ?>admin/opportunity">Oportunidades</a></li>
+                    <li><a href="<?php echo $app_path ?>admin/account">Cuentas</a></li>
+                    <li><a href="<?php echo $app_path ?>admin/profile">Perfil</a></li>
+                <?php } elseif($isUserLog) { ?>
+                    <!-- Menú de usuario normal -->
+                    <li><a href="<?php echo $app_path; ?>">Inicio</a></li>
+                    <li><a href="<?php echo $app_path; ?>opportunity/">Oportunidades</a></li>
+                    <li><a href="<?php echo $app_path; ?>suscribe/">Suscribirme</a></li>
+                    <li><a href="<?php echo $app_path; ?>profile/">Perfil</a></li>
+                <?php } else { ?>
+                    <!-- Menú para visitantes -->
+                    <li><a href="<?php echo $app_path; ?>">Inicio</a></li>
+                    <li><a href="<?php echo $app_path; ?>opportunity/">Oportunidades</a></li>
+                    <li><a href="<?php echo $app_path; ?>suscribe/">Suscribirme</a></li>
+                    <li><a href="<?php echo $app_path; ?>login">Iniciar Sesión</a></li>
+                <?php } ?>
             </ul>
         </nav>
     </header>

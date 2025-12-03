@@ -1,4 +1,4 @@
-<?php include("../../view/header_admin.php"); ?>
+<?php include("../../view/header.php"); ?>
 
 <link rel="stylesheet" href="../admin.css">
 <link rel="stylesheet" href="../../opportunity/style_op.css">
@@ -9,7 +9,7 @@
 
     <div class="contenido">
         <div style="text-align:center; margin-bottom: 20px;">
-           <a href="index.php?action=add" class="button">Añadir cuenta</a>
+           <a href="index.php?action=add_edit_account_form"><img src="<?php echo $app_path . "images/add.png"?>" class="icon_image"></a>
         </div>
 
         <section class="tarjetas">
@@ -29,14 +29,13 @@
 
                             <div class="card-actions">
 
-                               <a href="index.php?action=edit&id=<?php echo $user->getUserID(); ?>" class="button button-small">Editar</a>
+                               <a href="index.php?action=add_edit_account_form&userID=<?php echo $user->getUserID(); ?>">
+                                <img src="<?php echo $app_path . "images/edit.png"?>"  class="icon_image">
+                               </a>
 
-                                <form action="index.php" method="post" onsubmit="return confirm('¿Seguro que deseas eliminar esta cuenta?');">
-                                    <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="userID" value="<?php echo $user->getUserID(); ?>">
-                                    <button type="submit"
-                                            class="button button-small button-danger">Eliminar</button>
-                                </form>
+                                <a href="index.php?action=delete&userID=<?php echo $user->getUserID(); ?>">
+                                <img src="<?php echo $app_path . "images/trash.png"?>"  class="icon_image">
+                               </a>
 
                             </div>
 

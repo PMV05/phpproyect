@@ -1,4 +1,4 @@
-<?php include("../../view/header_admin.php"); ?>
+<?php include("../../view/header.php"); ?>
 
 <main>
     <h1>Perfil</h1>

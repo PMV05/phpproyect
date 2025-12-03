@@ -8,27 +8,42 @@
     require_once("../../model/validate.php");
     require_once("../../util/file.php");
 
-    $action = filter_input(INPUT_POST, 'action');
+    // Verifica si ha iniciado sesion
+    if($isAdminLog){
+        $action = filter_input(INPUT_POST, 'action');
 
-    // Esto es solo un ejemplo en lo que se utiliza el UserDB
-    $username = 'jonathan.vega';
+        // Si no hay una accion entrada, mostrara el perfil por default
+        if (!isset($action)) {
+            $action = filter_input(INPUT_GET, 'action');
 
-    // Si no hay una accion entrada, mostrara el perfil por default
-    if (!isset($action)) {
-        $action = filter_input(INPUT_GET, 'action');
-
-        if (!isset($action))
-            $action = "view_profile";
+            if (!isset($action))
+                $action = "view_profile";
+        }
+    }
+    else {
+        $action = "login";
     }
 
     switch($action) {
+        // Iniciar sesion
+        case 'login':
+            header("Location: ../login/");
+            exit();
+
+        // Cierra sesion 
+        case 'logout':
+            unset($_SESSION['user']);
+            unset($_SESSION['role']);
+            header("Location: ../login/");
+            exit();
+
         // Accion por default para ver el perfil del usuario
         case 'view_profile':
             // Busca la informacion del usuario
-            $user = UserDB::getUserById($username);
+            $user = UserDB::getUserById($admin_username);
 
             // Busca todas las oportunidades relacionadas al usuario
-            $opportunities = OpportunityDB::getOpportunitiesByUserId($username);
+            $opportunities = OpportunityDB::getOpportunitiesByUserId($admin_username);
 
             include("profile_view.php");
             break;
@@ -36,7 +51,7 @@
         // Accion para mostrar el formulario
         case 'edit_profile_form':
             // Busca la informacion del usuario
-            $user = UserDB::getUserById($username);
+            $user = UserDB::getUserById($admin_username);
 
             include("profile_edit.php");
             break;
@@ -49,7 +64,7 @@
             $passwords = [];
 
             $users = UserDB::getAllUsers();
-            $user = UserDB::getUserById($username);
+            $user = UserDB::getUserById($admin_username);
 
             $userID = filter_input(INPUT_POST, 'username'); 
             $email = filter_input(INPUT_POST, 'email'); 
@@ -148,7 +163,9 @@
                 break;
             }
             
-            UserDB::updateUser($user, $username);
+            UserDB::updateUser($user, $admin_username);
+            $_SESSION['admin_user'] = $user->getUserID();
+            $admin_username = $user->getUserID();
 
             header("Location: .");
             exit();

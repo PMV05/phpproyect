@@ -6,7 +6,21 @@
                 <p id="copyright">&copy; <?php echo date("Y"); ?> OportuniHub</p>
             </div>
             <div id="footer-nav">
-                <a>Log out</a>
+                
+                <?php if(!$isAdminLog) {
+                        if($isUserLog) { ?>
+                            <!-- Usurio inicio sesion -->
+                                <a href="<?= $app_path ?>login/?action=logout">Cerrar Sesión</a>
+                                <a href="<?= $app_path ?>admin">Administrador</a>
+                            <?php } else {?>
+                            <!-- Usuario no ha iniciado sesion -->
+                                <a href="<?= $app_path ?>login/?action=login">Iniciar Sesión</a>
+                                <a href="<?= $app_path ?>admin">Administrador</a>
+                            <?php } 
+                    } 
+                    else { ?>
+                        <a href="<?= $app_path . "admin"?>/login/?action=logout">Cerrar Sesión</a>
+                    <?php } ?>
             </div>
         </div>
         

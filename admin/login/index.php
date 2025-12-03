@@ -5,8 +5,6 @@ require_once("../../model/user_db.php");
 require_once("../../model/validate.php");
 echo '<link rel="stylesheet" href="/ccom4019/phpproyect/admin/login/style_log.css">';
 
-session_start();
-
 // Acción inicial
 $action = filter_input(INPUT_POST, 'action');
 
@@ -42,7 +40,7 @@ switch ($action) {
 
         // Validaciones de la contraseña
         if (!validate\requiredField($password) || !validate\password($password))
-            $errorMessage['password'] = "Contraseña inválida";
+            $errorMessage['passwordLog'] = "Contraseña inválida";
 
 
         // Si hay errores muestra el formulario
@@ -56,14 +54,20 @@ switch ($action) {
 
         // Verificar contrasena
         if (!password_verify($password, $user->getPassword())) {
-            $errorMessage['password'] = "Contraseña incorrecta";
+            $errorMessage['passwordLog'] = "Contraseña incorrecta";
+            include("login.php");
+            break;
+        }
+        else if ($user->getUserRole() != 2){
+            $errorMessage['passwordLog'] = "Usted no tiene acceso";
             include("login.php");
             break;
         }
 
         // Login exitoso
-        $_SESSION['user'] = $user->getUserID();
-        header("Location: ../index.php");
+        $_SESSION['admin_user'] = $user->getUserID();
+        $_SESSION['admin_role'] = $user->getUserRole();
+        header("Location: ../");
         exit();
 
     case 'register':
@@ -117,8 +121,10 @@ switch ($action) {
 
     // Logout
     case "logout":
+        unset($_SESSION['admin_user']);
+        unset($_SESSION['admin_role']);
         session_destroy();
-        header("Location: index.php?action=view_login_form");
+        header("Location: .");
         exit();
 
 }

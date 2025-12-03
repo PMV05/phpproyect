@@ -1,7 +1,4 @@
 <?php
-
-    // session_start();
-
     include("../../util/main.php");
     include("../../util/file.php");
     include("../../util/text.php");
@@ -10,23 +7,39 @@
     require_once "../../model/distributionListdb.php";
     require_once("../../model/validate.php");
 
-    $action = filter_input(INPUT_POST, 'action');
-    // Se muestran las oportunidades
-    if (!isset($action)) {
-        $action = filter_input(INPUT_GET, 'action');
+    // Verifica si ha iniciado sesion
+    if($isAdminLog){
+        $action = filter_input(INPUT_POST, 'action');
 
-        if (!isset($action))
-            $action = "view_opportunities";
+        // Se muestran las oportunidades
+        if (!isset($action)) {
+            $action = filter_input(INPUT_GET, 'action');
+
+            if (!isset($action))
+                $action = "view_opportunities";
+        }
+    }
+    else {
+        $action = "login";
     }
 
-    $username = "jonathan.vega";
-
     switch ($action) {
+        // Iniciar sesion
+        case 'login':
+            header("Location: ../login/");
+            exit();
+
+        // Cierra sesion 
+        case 'logout':
+            unset($_SESSION['user']);
+            unset($_SESSION['role']);
+            header("Location: ../login/");
+            exit();
 
         case 'view_opportunities':
             $opportunities = OpportunityDB::getAllOpportunities();
             
-            include("index_view.php");
+            include("opportunities_view.php");
             break;
 
         case 'add_edit_opportunity_form':

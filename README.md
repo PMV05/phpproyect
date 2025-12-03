@@ -1,4 +1,4 @@
-# OpportuniHub
+# OportuniHub
 
 ## Descripción
 OpportuniHub es una aplicación web donde las personas podran ver diferentes oportunidades disponibles, como trabajos, internados, becas y proyectos de investigación. En este las personas podrán suscribirse con su email para recibir las últimas oportunidades que fueron añadidas. Por otro lado, estos podrán crearse una cuenta para convertirse en contribuidor y poder publicar también oportunidades. En el caso de los administradores tendrán el control completo de todas las oportunidades y cuentas disponibles en la aplicación web.

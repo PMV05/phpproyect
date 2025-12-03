@@ -4,12 +4,12 @@
         // Permite conectarse con la base de datos opportuniHubDB
 
     class Database {
-        // private static $dsn = 'mysql:host=localhost;dbname=vegrivjo_db';
-        // private static $username = 'vegrivjo';
-        // private static $password = '840vegrivjo';        
-        private static $dsn = 'mysql:host=localhost;dbname=opportunihubdb';
-        private static $username = 'root';
-        private static $password = '';
+        private static $dsn = 'mysql:host=localhost;dbname=vegrivjo_db';
+        private static $username = 'vegrivjo';
+        private static $password = '840vegrivjo';        
+        // private static $dsn = 'mysql:host=localhost;dbname=opportunihubdb';
+        // private static $username = 'root';
+        // private static $password = '';
         private static $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
         private static $db;
 

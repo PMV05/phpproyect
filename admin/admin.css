@@ -53,19 +53,13 @@ main {
 .button {
     display: inline-block;
     padding: 8px 14px;
-    background: #0066cc;
     color: #fff;
     border-radius: 4px;
     text-decoration: none;
 }
 
-.button:hover {
-    background: #004c99;
-}
-
 /* Botón ADD viejo */
 .btn-add {
-    background-color: var(--details);
     border-radius: 50%;
     font-size: 1.6em;
     width: 40px;
@@ -84,14 +78,6 @@ main {
     cursor: pointer;
 }
 
-.editar {
-    color: var(--details);
-}
-
-.eliminar {
-    color: #f44336;
-}
-
 .add-container {
     grid-column: 1 / -1;
     text-align: right;
@@ -106,21 +92,6 @@ main {
 
 .delete-form {
     margin: 0;
-}
-
-.button-small {
-    padding: 3px 10px;
-    font-size: 0.85em;
-}
-
-.button-danger {
-    border-color: #ff4b4b;
-    color: #ff4b4b;
-}
-
-.button-danger:hover {
-    background-color: #ff4b4b;
-    color: #000;
 }
 
 .op-main {
@@ -255,14 +226,6 @@ main {
     background: transparent;
     cursor: pointer;
     font-size: 1.2rem;
-}
-
-.op-delete {
-    color: #ff4d4f;
-}
-
-.op-edit {
-    color: var(--details);
 }
 
 .op-empty-message {

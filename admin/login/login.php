@@ -1,3 +1,11 @@
+<?php
+
+  $username = (isset($username)) ? $username : "";
+  $email = (isset($email)) ? $email : "";
+  $password = (isset($password)) ? $password : "";
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,19 +36,19 @@
 
         <div class="input-container">
           <i class="fa-solid fa-user"></i>
-          <input type="text" name="username" placeholder="Nombre Completo" />
+          <input type="text" name="username" placeholder="Nombre Completo"  value="<?= $username?>"/>
           <span class='error-message'><?php echo (isset($errorMessage['username'])) ? $errorMessage['username'] : "" ?></span>
         </div>
 
         <div class="input-container">
           <i class="fa-solid fa-envelope"></i>
-          <input type="email" name="email" placeholder="Correo Electrónico" />
+          <input type="email" name="email" placeholder="Correo Electrónico" value="<?= $email?>"/>
           <span class='error-message'><?php echo (isset($errorMessage['email'])) ? $errorMessage['email'] : "" ?></span>
         </div>
 
         <div class="input-container">
           <i class="fa-solid fa-lock"></i>
-          <input type="password" name="password" placeholder="Contraseña" />
+          <input type="password" name="password" placeholder="Contraseña" value="<?= $password?>"/>
           <span class='error-message'><?php echo (isset($errorMessage['password'])) ? $errorMessage['password'] : "" ?></span>
         </div>
 
@@ -64,15 +72,15 @@
         <span>o usa tu cuenta</span>
 
         <div class="input-container">
-          <i class="fa-solid fa-envelope"></i>
-          <input type="text" name="username" placeholder="Nombre de usuario" />
+          <i class="fa-solid fa-user"></i>
+          <input type="text" name="username" placeholder="Nombre de usuario" value="<?= $username?>"/>
           <span class='error-message'><?php echo (isset($errorMessage['usernameLog'])) ? $errorMessage['usernameLog'] : "" ?></span>
         </div>
 
         <div class="input-container">
           <i class="fa-solid fa-lock"></i>
-          <input type="password" name="password" placeholder="Contraseña" />
-          <span class='error-message'><?php echo (isset($errorMessage['password'])) ? $errorMessage['password'] : "" ?></span>
+          <input type="password" name="password" placeholder="Contraseña" value="<?= $password?>"/>
+          <span class='error-message'><?php echo (isset($errorMessage['passwordLog'])) ? $errorMessage['passwordLog'] : "" ?></span>
         </div>
 
         <button type="submit">Entrar</button>
