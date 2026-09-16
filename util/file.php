@@ -1,7 +1,7 @@
 <?php 
     include("main.php");
 
-    if(strpos(getcwd(), admin) == True)
+    if(strpos(getcwd(), "admin") !== False)
         $file_dir_path = realpath(getcwd() . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "files");
     else
         $file_dir_path = realpath(getcwd() . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR. "files");
